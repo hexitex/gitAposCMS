@@ -1,0 +1,55 @@
+@import "prefixer.less";
+@media only screen and (max-width : 640px){
+
+    
+    .button-next{
+        margin-top: calc(100% - 130%);
+    }
+    .button-prev{
+        margin-top: calc(100% - 130%);
+    }
+    // Fix bug for not centering text element
+    .main-content{
+        display: block !important;
+    }
+    .title-responsive-area{
+        display: block !important;
+    }
+    // End fix bug
+    #main{
+        margin-bottom: 80%;
+    }
+   
+    .responsive-svg{
+        margin-top: 12px;
+        margin-left: 10px;
+    }
+
+    // Disable center
+    .center{
+        left: 0%;
+    }
+
+    .bar{
+        height: 3px;
+        margin-bottom: 5px;
+    }
+
+    // Disable picture area
+
+   
+    .back-container{
+        display : none;
+    }
+}
+
+
+@media only screen and (max-width :460px){
+    #main{
+        margin-bottom: 85%;
+    }
+
+    .portfolio-slide .apos-slideshow-item {
+        width: 40vh;
+    }
+}

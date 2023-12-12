@@ -1,0 +1,136 @@
+{% macro searchArea(urlsearch, id, data) %}
+    {# args : '/slugUrl' , 'formId' , data #}
+    <div class="doc-widget-container">
+
+        <div class="">
+            <div class="prod-search-field">
+                <form method="GET" id="{{ id }}-list" action="{{ urlsearch }}">
+                    <input type="text" name="search" placeholder="Search" data-search="on" value="{{data.query.search}}"/><input
+            type="submit" value="Search" style="display:none"/>
+                </form>
+            </div>
+        </div>
+
+        <br/>
+         {% if data.cats or (data.subcats and 'ecomcategories' in data.url) or data.query.ecomsubcategories or data.piecesFilters.tags%}
+         <div id="filt" style="display:block" onclick="taggle()">Show Filters</div>
+         <br/>
+<script>
+function taggle(){
+  var x = document.getElementById("filters");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById("filt").innerHTML="Hide Filters"
+  } else {
+    x.style.display = "none";
+     document.getElementById("filt").innerHTML="Show Filters"
+  }
+}
+</script>
+         {% endif %}
+        <div id="filters">
+        {% if data.cats %}
+            <div >
+                <div class="tags-area" style="{% if not data.cats | length %} display : none;{% endif %}">
+                    <h5 class="" style="width : 100%;">Category(s)</h5>
+                    <div class="tag-filters">
+                       
+                            {% for cat in data.cats %}
+                                {%if data.query.ecomcategories != cat._id%}
+                                    <a href="{{ data.url | build({ tags:'',ecomcategories: cat._id,search:'',ecomsubcategories: '',page:'',append:''})}}">
+                                        <div class="swiper-slide ">
+                                            {{ cat.title }}
+                                        </div>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ data.url | build({ tags:'',ecomcategories: '',search:'',ecomsubcategories: '',page:'',append:''})}}">
+                                        <div class="swiper-slide current">
+                                            <span class="fa fa-check-circle" style="font-size:18px;color:grey"></span>
+                                            &nbsp;{{ cat.title }}
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                       
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if data.subcats and 'ecomcategories' in data.url %}
+            <div>
+                <div class="tags-area" style="{% if not data.subcats | length %} display : none;{% endif %}">
+                    <h5 class="" style="width : 100%;">Sub-categories</h5>
+                    <div class="tag-filters">
+                        {# <div class=""> #}
+                            {% for scat in data.subcats %}
+                                {% set matched = false %}
+                                {% if data.query.ecomsubcategories %}
+                                    {% for qsubcat in data.query.ecomsubcategories %}
+                                        {% if qsubcat == scat.slug %}
+                                            {%set matched=true%}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if not matched %}
+                                    <a href="{{ data.url | build({ tags:'',ecomsubcategories: { $addToSet: scat.slug },search:'',page:'',append:'' })}}">
+                                        <div class="swiper-slide">
+                                            {{ scat.title }}
+                                        </div>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ data.url | build({ tags:'', ecomsubcategories:{ $pull: scat.slug },search:'',page:'',append:'' })}}">
+                                        <div class="swiper-slide current">
+                                            {{ scat.title }}
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        {# </div> #}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if  data.query.ecomsubcategories or data.piecesFilters.tags%}
+            {# {% if data.piecesFilters.tags and data.query.nccsubcategories%} #}
+            <div>
+                <div class="tags-area" style="{% if not data.piecesFilters.tags | length %} display : none;{% endif %}">
+                    <h5 class="" style="width : 100%;">Filter by Tag(s)</h5>
+
+                    <div class="tag-filters">
+                        {# <div class=""> #}
+
+                        {% for tag in data.piecesFilters.tags %}
+                            {% set matched = false %}
+                            {% if data.query.tags %}
+                                {% for qtag in data.query.tags %}
+                                    {% if qtag == tag.value %}
+                                        {%set matched=true%}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if not matched %}
+                                <a href="{{ data.url | build({ tags: { $addToSet: tag.value },search:'',page:'',append:'' })}}" style="margin-bottom:5px">
+                                    <div class="swiper-slide" >
+                                            #{{ tag.value }}
+                                    </div>
+                                </a>
+                            {% else %}
+                                <a href="{{ data.url | build({ tags:{ $pull: tag.value },search:'',page:'',append:'' })}}" style="margin-bottom:5px;color:white">
+                                    <div class="swiper-slide current">
+                                   
+                                       
+                                            #{{ tag.value }}
+
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {# </div> #}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,7 @@
+{# {% for piece in data.widget._pieces %} #}
+
+ {% for piece in data.widget._pieces | sort(attribute='title') %}
+  <p>
+    <a href="/products?ecomsubcategories={{ piece.slug }}">{{ piece._category.title }} - {{ piece.title }} </a>
+  </p>
+{% endfor %}

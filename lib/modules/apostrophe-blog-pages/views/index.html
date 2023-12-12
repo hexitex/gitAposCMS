@@ -1,0 +1,40 @@
+{# {% import "apostrophe-blog-pages:macros/collapseIcon.html" as button %}
+{% import "macros/backButton.html" as backButton %}
+{% import "macros/navigation.html" as nav %} #}
+{# {% extends data.outerLayout %} #}
+{% extends "layout.html" %}
+{% if data.piece %}
+{% if data.piece.seoTitle %}
+{% set title = data.piece.seoTitle %}
+{% else %}
+{% set title = data.piece.title %}
+{% endif %}
+{% else %}
+{% if data.page.seoTitle %}
+{% set title = data.page.seoTitle %}
+{% else %}
+{% set title = data.page.title %}
+{% endif %}
+{% endif %}
+{% block title %}{{ title }}{% endblock %}
+{% block extraHead %}
+{% include "apostrophe-seo:view.html" %}
+{{ super() }}
+{% endblock %}
+
+
+{% block main %}
+<main data-apos-ajax-context="blogs" id="barba-wrapper">
+  <div class="barba-container" data-namespace="main">
+    <section id="mainblogSection">
+      <div class="blog-flex-index">
+        {% include "indexAjax.html" %}
+      </div>
+    </section>
+  
+
+  </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{# {% import "macros/linkBreadcrumbs.html" as link %} #}
+{% import "macros/widgets.html" as widget with context %}
+{% import "macros/previousNextProduct.html" as next %}
+{# {% import "macros/navigation.html" as nav %} #}
+{# % import "macros/postScroll.html" as info % #}
+{# {% import "ec-columns:macros/utils.html" as utils with context %} #}
+{# Macros (Look on top level view folder) #}
+{# Excess using data.piece only #}
+{% block title %}{{ data.piece.title }}
+{% endblock %}
+{% block extraHead %}
+  {# OPEN GRAPH #}
+  {% include "apostrophe-open-graph:view.html" %}
+  {{ super() }}
+{% endblock %}
+
+{# {% block beforeMain %} #}
+{# <style> #}
+{# html { #}
+{# visibility: hidden; #}
+{# } #}
+{# </style> #}
+{# <header> #}
+{# {{ super() }} #}
+{# <aside> #}
+{# {{ nav.nav(data,'product-show') }} #}
+{# </aside> #}
+
+{# </header> #}
+{# {% endblock %} #}
+
+{% block main %}
+  <main id="barba-wrapper">
+    <div class="barba-container" data-namespace="main-prod">
+      <section class="body-content">
+        <div class="show-content-area">
+
+          {# {% if data.piece %}
+            {{ link.breadcrumbs(data.page , data.piece) }}
+          {% endif %} #}
+         
+          {#% set textCount = data.piece.title %#}
+          <div class="main-blog-area">
+          
+            <h3 >{{ data.piece.title }} from {{data.piece.brand}}</h3>
+            <div class="line"></div>
+
+            <div class="two-container-column900" style="margin:0 auto; padding:0; height:auto;">
+
+              <div class="two-column-one900" style="padding-bottom:40px;padding-right:40px;padding-left:40px;">
+                <div class="product-pic">
+                  {{ apos.singleton(data.piece, 'image', 'apostrophe-images', { size : 'full', edit : false }) }}
+                </div>
+                     {{ widget.postWidget(data.piece , 'nsection') }}
+                <div class="tags-show-area">
+                  {% for tags in data.piece.tags %}
+                    <div class="tag-item ">#{{ tags | capitalize }}</div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="two-column-two900" style="padding-bottom:40px;padding-right:40px;padding-left:40px;height:auto">
+                {% if data.piece._reviews %}
+                  {%set reviewsCount=data.piece._reviews.length%}
+                  {%set wating=0%}
+
+                  {% for revs in data.piece._reviews %}
+                    {% set wating = wating + revs.ratings %}
+                  {% endfor %}
+                  <a href="#review" onclick="UTILS.anchorTag();" style="text-decoration : none; color:inherit">
+                    {{ apos.reviewForm.stars(wating/reviewsCount,5,true,true)|safe }}</a>
+                  <span>from {{reviewsCount}} reviews</span>
+                </br>
+              {% endif %}
+              <span>
+                <b>Stock:</b>
+              </span>
+              <span>{{ data.piece.quantity }}</span><br/>
+              <span>
+                <b>Item Weight (kg):</b>
+              </span>
+              {{ data.piece.weight }}</span><br/>
+            <span>
+              <b>Item Volume:</b>
+            </span>
+            <span>
+              {{ data.piece.volume }}</span><br/>
+            <div class="line"></div>
+
+            <h4>Product Description</h4>
+            {{apos.area(data.piece,'description','apostrophe-rich-text', {edit:false})}}
+            <h5>Items per pack: {{ data.piece.packSize }}</h5>
+            <h5>
+              {% if data.piece.discount %}
+                <del class="prod-discount">
+                  {{ data.global.currency }}{{ data.piece.price.toFixed(2) }}
+                </del> &nbsp;&nbsp;&nbsp;
+                {% endif %}
+              {{ data.global.currency }}{{data.piece.total}}
+            </h5>
+
+            {% if data.piece.quantity > 0  %}
+              <form id="addToCart" class="addToCart">
+                <input type="hidden" name="productId" value="{{data.piece._id}}">
+                <div class="quantityInput">
+                <div style="flex-basis: auto;">
+                <p>Quantity</p>
+                  <input type="number" placeholder="Quantity" min="1" max="{{ data.piece.quantity }}" class="prod-quantity apos-field-input" name="quantity" value="1">
+                </div>
+                  <div style="flex-basis: auto;">
+                  <p>&nbsp;</p>
+                  <button type="submit" class="submitContact submit" value="Add to cart" onclick="setTimeout(function(){window.history.back(3)},300)" >Add to cart</button>
+                  </div>
+                  <div class="addToCart thankYou" style="display: none;">Added</div>
+                </div>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+        <div>
+
+          <section class="end-section" id="esid" style="{{ "display:none;" if not data.previous and not data.next }}">
+            <div class="title-center">
+              <div class="underline"></div>
+
+              {% if data.next and data.previous %}
+                <h1 class="title-read">You may also need some of these</h1>
+              {% elif data.next or data.previous %}
+                <h1 class="title-read">You may also want!</h1>
+              {% endif %}
+
+            </div>
+
+            {{ next.link(data) }}
+            <div class="line"></div>
+          </section>
+          {% if data.piece.productConfig === "review" %}
+
+            {% if data.piece._reviews %}
+              <section class="review-area" id="review">
+                <div class="review-container">
+
+                  {% for piece in data.piece._reviews %}
+
+                    <div class="review-piece">
+                      <h4 class="reader-review">{{ piece.readerName }}
+                        <span class="review-date">- {{ piece.date | date("Do MMM YYYY") }}</span></h4>
+                      {{ apos.reviewForm.stars(piece,5,true)|safe }}
+                      <p class="review-paragraph">{{ piece.reviews }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+              </section>
+            {% endif %}
+            {# {% if data.user %} #}
+              {{ apos.singleton(data.piece , 'enableReviews' , 'reviews') }}
+            {# {% endif %} #}
+
+          {% endif %}
+
+        </div>
+      </section>
+
+      {# <aside class="scrollbar-track scrollbar-track-y">
+        <div class="scrollbar-thumb scrollbar-thumb-y"></div>
+      </aside> #}
+
+    </div>
+
+  </main>
+
+{% endblock %}

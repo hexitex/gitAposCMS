@@ -1,0 +1,30 @@
+{% import "apostrophe-schemas:macros.html" as schemas %}
+
+<form class="contact-form" id="{{ data.page._id }}"  data-member-form>
+  <p class="form-instruction">{{ data.widget.instruction }}</p>
+  {# {{data.member|dump}} #}
+  {% for piece in data.member %}
+    <label class="label-contact" for="{{ piece.name }}" style="{{ "display:none;" if piece.readOnly }}">
+      {{ piece.label }}
+      {% if piece.name == 'pass' or piece.name == 'passCon' %}
+        {{ schemas.passwordBody(piece) }}
+        <label class="label-contact">Confirm Password 
+     <input id="" class="apos-field-input apos-field-input-text" name="passCon" autocomplete="off" type="password">
+        </label>
+
+      {% else %}
+        
+        {# {% if piece.name=='photo' %}
+         {{ schemas.stringBody(piece) }}
+        {% endif %} #}
+        {{ schemas.stringBody(piece) }}
+      {% endif %}
+
+    </label>
+  {% endfor %}
+  <button type="submit" class="submitContact">Submit</button>
+  {# Later gets hoisted out and becomes visible #}
+  <div class="thank-you" data-thank-you>
+    <h4>Thank you for your request! We'll send confirmation soon :)</h4>
+  </div>
+</form>

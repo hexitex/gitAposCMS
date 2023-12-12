@@ -1,0 +1,7 @@
+{% import "macros/widgets.html" as widget %}
+{% macro base(data,edit) %}
+{{data.preRender| safe}}
+
+		{{ widget.postWidget(data , 'nsection') }}
+   
+{%endmacro%}

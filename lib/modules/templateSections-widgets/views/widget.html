@@ -1,0 +1,10 @@
+
+{% import "macros/widgets.html" as widget %}
+{%if data.widget%}
+
+{% set section=apos.sectionTemplate.copyme(data.widget) %}
+
+{%endif%}
+
+{{ widget.postWidget(section, 'newnsection') }}
+	

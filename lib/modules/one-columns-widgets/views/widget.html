@@ -1,0 +1,31 @@
+{% import "macros/widgets.html" as widget %}
+<div class="one-container-column ">
+    <div class="one-col-one 
+    {# {% if data.widget.shadowBox %}
+         {{data.widget.shadowBox}}
+    {% endif %} #}
+    " 
+    style="
+      {% if data.widget.width %}
+        max-width :{{ data.widget.width }};
+    {% endif %}
+    {% if data.widget.marginLeft %}
+        margin-left :{{ data.widget.marginLeft }};
+    {% endif %}
+    {% if data.widget.marginRight %}
+        margin-right :{{ data.widget.marginRight }};
+    {% endif %}
+    {% if data.widget.marginTop %}
+        margin-top :{{ data.widget.marginTop }};
+    {% endif %}
+    {% if data.widget.marginBottom %}
+        margin-bottom :{{ data.widget.marginBottom }};
+    {% endif %}
+    {% if data.widget.padding %}
+        padding :{{ data.widget.padding }};
+    {% endif %}  
+    ">
+        {{ widget.postWidget(data.widget , 'column') }}
+    </div>
+    
+</div>

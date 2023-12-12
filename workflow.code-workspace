@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ronnidc.nunjucks"
+		]
+	},
+	"recommendations": [
+		"ronnidc.nunjucks",
+		"douglaszaltron.nunjucks-vscode-extensionpack"
+	]
+}

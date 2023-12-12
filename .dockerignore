@@ -1,0 +1,16 @@
+.git
+Dockerfile
+.dockerignore
+local.example.js
+.gitignore
+README.md
+env.*
+devops
+data
+app4/public/uploads
+app4/public/exports
+app4/data
+# app4/public/uploads
+# public/exports
+# app4
+

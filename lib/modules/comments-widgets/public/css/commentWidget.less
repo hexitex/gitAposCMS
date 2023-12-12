@@ -1,0 +1,95 @@
+@font : 18.62px;
+
+
+.comment-widget {
+  margin   : auto;
+  display  : flex;
+  flex-wrap: wrap;
+
+  label {
+    display: inline-block;
+    width  : 200px;
+  }
+
+  &>textarea {
+    width        : 100%;
+    padding      : 22px 53px;
+    margin       : 20px 0;
+    background   : none;
+    border       : none;
+    border-bottom: @inputBorder;
+    color        : @inputTextColor;
+    font-family  : @mainFont;
+    font-size    : @font;
+    height       : 95px;
+  }
+
+  .thank-you {
+    display: none;
+  }
+
+  &>input {
+    padding      : 10px 56px;
+    background   : none;
+    border       : none;
+    border-bottom: @inputBorder;
+    color        : @inputTextColor;
+    font-family  : @mainFont;
+    font-size    : @font;
+    margin       : 20px 0;
+  }
+
+  margin-bottom: 100px;
+}
+
+
+.leave-comment {
+  color        : @mainColor;
+  width        : 100%;
+  font-size    : 28px;
+  line-height  : 39px;
+  margin-bottom: 3%;
+  margin-top   : 3%;
+}
+
+.comment-container {
+  display  : flex;
+  flex-wrap: wrap;
+}
+
+.reader-comment {
+  color      : @secondColor;
+  font-size  : 16.00px;
+  font-family: @mainFont;
+  line-height: 34px;
+}
+
+.comment-date {
+  color    : @subtitleColor;
+  font-size: 12px;
+}
+
+.comment-paragraph {
+  font-size  : 18.62px;
+  color      : #9B9B9B;
+  font-family: @mainFont;
+  line-height: 26px;
+}
+
+.comment-piece {
+  margin-bottom: 2%;
+  margin-right : 2%;
+  border       : solid 1px #2d545e;
+  padding      : 2%;
+  height       : auto;
+  border-radius: 12px;
+}
+
+@media only screen and (max-width:900px) {
+
+  .comment-piece {
+    width       : 100%;
+    height      : auto;
+    margin-right: 0;
+  }
+}

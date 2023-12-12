@@ -1,0 +1,60 @@
+{% import "macros/indexSearch.html" as search with context %}
+
+<div class="main-member-area">
+
+  <div style="margin-top:60px;text-align:center;">
+    <h2>Club Membership</h2>
+  </div>
+
+  <div class="doc-loop"  style="min-height:60vh">
+    <div class="sidebar">
+      <h4 style="padding:40px">Search for member, with FID, NCMD, Member No or Name</h4>
+      {{ search.searchArea(data.pieces.slug , data.pieces.slug , data) }}
+    </div>
+
+    <div data-apos-ajax-append class="doc-widget-container" style="margin-top:60px">
+      {%if data.pieces%}
+        {% for fpiece in data.pieces %}
+          {% set image = apos
+            .images
+            .first(fpiece.photo) %}
+
+          <div class="doc-widget-frame ">
+            <a href=".{{ fpiece._url }}" class="doc-link directory">
+              <div class="doc-widget-item" style="{% if image %} background-image:url(.{{ apos.attachments.url(image, {size : 'full'}) }}); {% if apos.attachments.hasFocalPoint(image) %} background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }}; {% endif %} {% endif %}"></div>
+              <div class="content-doc-area" data-piece-id="{{ fpiece._id }}">
+                <h5 class="white-text font-outline review-doc-area">
+                  {{ fpiece.title }} - {{fpiece.memberNumber}}
+                </h5>
+                <p  class="white-text font-outline review-doc-area">Email: 
+                 {{fpiece.emailAddress}}
+                </p>
+                <div class="white-text" >
+                 Expires: {{fpiece.expDate | date("Do MMM YYYY") }}
+                </div>
+                <h5 class="white-text font-outline review-doc-area">
+                  Phone: {{ fpiece.landLine }} / {{fpiece.mobile}}
+                </h5>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+    </div>
+    {% if data.pieces.length == 0 %}
+      <div class="notFound"  style="position: absolute;left: 30%;top: 30%;">
+        <h3>Sorry nothing found !</h3>
+        <p>Try another search</p>
+      </div>
+    {% endif %}
+  </div>
+  {% if data.currentPage < data.totalPages %}
+    {# <a data-apos-ajax-infinite-scroll href="{{ data.url | build({ page: data.currentPage + 1, append: 1 }) }}" style="display:block !important">Load More...</a> #}
+    <a style="text-align:center" href="{{ data.url | build({ page: data.currentPage + 1, append: 1 }) }}">Load More...</a>
+  {% endif %}
+  {# {% if rendered < 1 %}
+    {{ data.url | build({ page: data.currentPage + 1, append: 1 })}}
+  {% endif %} #}
+
+</div>

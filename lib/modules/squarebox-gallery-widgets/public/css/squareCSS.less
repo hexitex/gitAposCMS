@@ -1,0 +1,46 @@
+div[data-dom="square"] {
+  // padding: .5vw;
+  font-size: 0;
+  display: -ms-flexbox;
+  -ms-flex-wrap: wrap;
+  -ms-flex-direction: column;
+  -webkit-flex-flow: row wrap; 
+  flex-flow: row wrap; 
+  display: -webkit-box;
+  display: flex;
+  max-height: 100% !important;
+
+}
+div#square-children{
+  -webkit-box-flex: auto;
+  -ms-flex: auto;
+  flex: auto; 
+  width: 20%; 
+  margin: .5vw; 
+
+  &  img{
+    width : 100%;
+    height : auto;
+  }
+}
+
+@media only screen and(max-width : 360px){
+  div[data-dom="parent"]{
+
+    & > div#children{
+      width : 20%;
+    }
+  }
+}
+
+.vbox-num{
+  font-family: @mainFont;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.vbox-title{
+  font-family: @mainFont;
+  font-weight: normal;
+  font-style: normal;
+}

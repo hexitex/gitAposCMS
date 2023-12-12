@@ -1,0 +1,30 @@
+{% if data.comments.comments %}
+<div class="comment-container" style="background-color : #deffde;">
+        {% for piece in data.comments.comments %}
+            <div class="comment-piece">
+                <h4 class="reader-comment">{{ piece.readerName }} <span class="">- {{ piece.date | date("Do MMM YYYY") }}</span></h4>
+                <p class="comment-paragraph">{{ piece.comment }}</p>
+            </div>
+        {% endfor %}
+</div>
+{% elif data.comments.comments | length and [] %}
+<div class="comment-container" style="background: #ff8d8d;">
+        <p class="comment-paragraph" >There are no newest comments</p>
+</div>
+{% endif %}
+{{ apos.log(data.comments.comments | length) }}
+{{ apos.log(data.comments.comments) }}
+{% if data.commentsBefore.comments %}
+<div class="comment-container" style="background: #ff8d8d;">
+        {% for piece in data.commentsBefore.comments %}
+            <div class="comment-piece">
+                <h4 class="reader-comment ">{{ piece.readerName }} <span class="">- {{ piece.date | date("Do MMM YYYY") }}</span></h4>
+                <p class="comment-paragraph" >{{ piece.comment }}</p>
+            </div>
+        {% endfor %}
+</div>
+{% elif data.commentsBefore.comments | length and [] %}
+<div class="comment-container" style="background: #ff8d8d;">
+        <p class="comment-paragraph" >There are no previous comments</p>
+</div>
+{% endif %}

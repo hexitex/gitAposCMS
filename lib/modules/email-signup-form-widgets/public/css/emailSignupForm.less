@@ -1,0 +1,59 @@
+@fullWidth : 100%;
+@fullHeight : 100%;
+
+input[name="signupPersonName"]{
+    height : 61px;
+    margin-top: 21px;
+    display: inherit;
+}
+
+input[name="signupEmail"]{
+    margin-top: 21px;
+    display: inherit;
+    height : 61px;
+}
+
+.thank-you{
+    display : none;
+}
+
+.label-email-signup{
+    font-size : 28px;
+    line-height : 39px;
+    // letter-spacing: -0.35px;
+    flex : 1 50%;
+    padding : 20px;
+}
+
+button.submit-email-signup{
+    border-radius: 6px;
+    box-shadow: 0 3px 30px rgba(0,0,0,0.18);
+    color : @mainColor;
+    background-color: @thirdColor;
+    border : 1px solid @subtitleColor;
+    padding : 11px 78px;
+    cursor: pointer;
+    width:100%;
+    margin-left : 20px;
+    font-size: 18.62px;
+    line-height: 26px;
+    // letter-spacing: -0.20px;
+
+    &:hover{
+        color : #ffffff;
+        background-color: @mainColor;
+    }
+}
+
+@media only screen and (max-width : 900px){
+   
+    .label-email-signup{
+        font-size: 24.76px;
+        line-height: 34px;
+        // letter-spacing: -0.20px;
+    }
+
+    .label-email-signup{
+        flex : 1 100%;
+    }
+}

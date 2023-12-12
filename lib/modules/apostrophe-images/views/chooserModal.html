@@ -1,0 +1,9 @@
+{%- extends "chooserModalBase.html" -%}
+{# My Custom Extend. No need to push. As long as the name of the file is similar to original node_modules #}
+{% block instructions %}
+    {%- if data.limit == 1 -%}
+        {{ __('Choose ' + data.options.label + ' to associate with this item. Use TinyPNG to compress before upload any Images. Link: https://tinypng.com') }}
+    {%- else -%}
+        {{ __('Choose ' + data.options.pluralLabel + ' to associate with this item. Use TinyPNG to compress before upload any Images. Link: https://tinypng.com') }}
+    {%- endif -%}
+{% endblock %}

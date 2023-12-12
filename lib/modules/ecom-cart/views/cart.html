@@ -1,0 +1,166 @@
+{% extends "layout.html" %}
+{% if data.piece %}
+  {% if data.piece.seoTitle %}
+    {% set title = data.piece.seoTitle %}
+  {% else %}
+    {% set title = data.piece.title %}
+  {% endif %}
+{% else %}
+  {% if data.page.seoTitle %}
+    {% set title = data.page.seoTitle %}
+  {% else %}
+    {% set title = data.page.title %}
+  {% endif %}
+{% endif %}
+{% block title %}{{ title }}
+{% endblock %}
+{% block extraHead %}
+  {% include "apostrophe-seo:view.html" %}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <script src="{{ data.global.paypalClientUrl }}&currency={{ data.global.currencyPaypal }}"></script>
+  {{ super() }}
+{% endblock %}
+
+
+{% block main %}
+  <main  id="barba-wrapper">
+    <div class="barba-container" data-namespace="main">
+      <section id="CARTSECT">
+        <div class="blog-flex-index" style="text-align=center">
+          <div class="main-blog-area">
+             <h3> Your Cart {{ piece.createdAt | date("DD/MM/YYYY") }}
+            </h3>
+
+            {% if not data.cart %}
+              <h4>You Have An Empty Cart</h4>
+            {% else %}
+              <div style="text-align:right;margin-bottom:12px;">
+                <a href="/cart/clear">Clear Cart</a>
+              </div>
+            {% endif %}
+
+            {% for p in data.cart %}
+              {% set image = apos
+                .images
+                .first(p.product_data.image) %}
+              <div class="list-group-item" id="{{p.product_data._id}}">
+                <div class="blog-item-index" id="productsListed">
+                  {% if image %}
+                    <div class="thumbnail-blog-area-index" style="background-image:url({{ apos.attachments.url(image , {size : 'one-third'}) }}); 
+                           {% if apos.attachments.hasFocalPoint(image) %}
+                           background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};
+                           {% else %}
+                           background-position: 50% 50%;
+                           {% endif %}
+                            background-repeat: no-repeat;
+                            background-size:cover;" title="{{ p.product_data.title }}"></div>
+                    {% else%}
+                    <div class="thumbnail-blog-area-index"></div>
+                  {% endif %}
+                  <div class="content-blog-area-index" data-piece-id="{{ finalPiece._id }}">
+                    <h4>
+                      <a href="{{ p.product_data._url }}">{{ p.product_data.title }}</a>
+                    </h4>
+                    <div class="paragraph">
+                      {{ apos.areas.plaintext(p.product_data.description , { limit : 450 , ellipsis : '...' }) }}
+                    </div>
+                  </div>
+
+                  <div class="content-blog-area-index" style="float:right;" data-piece-id="{{ p.product_data._id}}">
+                    {# <div class="list-group" style="float:right;style="min-width:30%;max-width:30%""> #}
+                    <p>Quantity: <span>{{p.quantity}}</span></p>
+                    <p>Price: <span>{{ data.global.currency }}
+                        {{p.product_data.price | round(2)}}</span></p>
+                    <p>Discount: <span>{{ data.global.currency }}
+                        {{p.product_data.discount}}</span></p>
+                    <p>Subtotal: <span>{{ data.global.currency }}
+                        {{p.product_data.total*p.quantity | round(2)}}</span></p>
+                    <button id="delete" class="btn btn-info" type="button" name="button" onclick="deleteFromCart('{{p.product_data._id}}')">Remove</button>
+                    {# </div> #}
+                  </div>
+
+                </div>
+
+              </div>
+              {%endfor%}
+
+              <div >
+                {% if data.pay.total %}
+                  <div class="list-group" style="text-align:center;width:100%;margin:0 auto;">
+                    <p class="alert alert-info">Discount: {{ data.global.currency }}{{data.pay.discount}}</p>
+                    <p class="alert alert-info">Total: {{ data.global.currency }}{{data.pay.total}}</p>
+                    <div id="paypal-button-container"></div>
+                </ul>
+                <script>
+                  //let vals=[];
+                  //for (items in data.cart)
+                  //{ let sub=items.product_data.total*items.quantity;
+                  //  let item='Product '+items.quantity+' X '+items.product+' @ '+sub+' '+ data.global.currencyPaypal
+                  //  vals.push(item);
+
+                  //}
+                  paypal
+                    .Buttons({
+                      createOrder: function (data, actions) {
+                        return actions
+                          .order
+                          .create({
+                            purchase_units: [
+                              {
+                                amount: {
+                                  value: '{{ data.pay.total }}',
+                                  currency_code: '{{ data.global.currencyPaypal }}'
+                                },
+                                "description": "Order from {{data.global.organisaton}}",
+                                "item_list": {
+                                  "items": [
+                                    {% for item in data.cart %}
+                                      {% set sub=item.product_data.total*item.quantity %}
+                                      {
+                                        "name": "{{item.product_data.title}}",
+                                        "sku": "{{item.product_data.serial}}",
+                                        "price": "{{sub}}",
+                                        "currency": "{{data.global.currencyPaypal}}",
+                                        "quantity": "{{item.quantity}}",
+                                        "description": "",
+                                        "tax": "0.0"
+                                      },
+                                    {% endfor %}
+                                  ]
+                                }
+                              }
+                            ]
+                          });
+                      },
+                      onApprove: function (data, actions) {
+                        return actions
+                          .order
+                          .capture()
+                          .then(function (details) {
+                            //alert('Transaction completed by ' + details.payer.name.given_name);
+                            // Call your server to save the transaction
+                            $.post('/paypal/complete', data, function (result) {
+                              if (result.success === true) {
+                                window.location.href = '/';
+                              }
+                            });
+                            return fetch('/paypal/complete', {
+                              method: 'post',
+                              body: JSON.stringify({orderID: data.orderID})
+                            });
+                          });
+
+                      }
+                    })
+                    .render('#paypal-button-container');
+                </script>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block afterMain %}
+{% endblock %}

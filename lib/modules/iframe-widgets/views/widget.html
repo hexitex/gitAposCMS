@@ -1,0 +1,21 @@
+<div class="blocky"><iframe id="{{data.widget._id}}iframe"
+ src="{{data.widget.src}}{% if data.widget.addEmbed %}&output=embed{%endif%}"
+    {%if data.widget.title%} title="{{data.widget.title}}" {%endif%}
+    {%if data.widget.importance%} importance ="{{data.widget.importance}}" {%endif%}
+    {%if data.widget.name%} name="{{data.widget.name}}" {%endif%}
+    style="{%if data.widget.width%}width:{{data.widget.width}};{%endif%}
+    {%if data.widget.height%}height:{{data.widget.height}};{%endif%}" 
+    {%if data.widget.addition%}allow="{{data.widget.addition}}" {%endif%}
+    sandbox='{% if data.widget.allowSameOrigin %}allow-same-origin {%endif%}
+    {% if data.widget.allowForms %}allow-forms {%endif%}
+    {%if data.widget.allowModals%}allow-modals {%endif%}
+    {% if data.widget.allowOrientationLock%}allow-orientation-lock {%endif%}
+    {%if data.widget.allowPointerLock%}allow-pointer-lock {%endif%}
+    {%if data.widget.allowPopups%}allow-popups {%endif%}
+    {%if data.widget.allowPopupsToEscapeSandbox%}allow-popups-to-escape-sandbox {%endif%} 
+    {%if data.widget.allowPresentation%}allow-presentation {%endif%}
+    {%if data.widget.allowScripts%}allow-scripts {%endif%}'  
+   >
+    <p>Your browser does not support iframes, use a newer browser - we are almost a 3rd gen specices!</p>
+</iframe>
+</div>

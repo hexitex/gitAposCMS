@@ -1,0 +1,32 @@
+{% import "macros/widgets.html" as widget %}
+{% extends "layout.html" %}
+
+
+{% block main %}
+<main id="barba-wrapper">
+
+  <div class="barba-container" data-namespace="main{{data.piece._id}}">
+
+    {% for piece in data.pieces %}
+   
+    <section class="main-content" style="border:2px dashed #fff">
+      <div class="blocky" style="padding:5%">
+        <a class='title centered' href="{{ piece._url }}">{{ piece.title }}</a><br /><br />
+     
+        {{ widget.postWidget(piece , 'nsection') }}
+      </div>
+    </section>
+    {% endfor %}
+
+    <section>{% import 'apostrophe-pager:macros.html' as pager with context %}
+    {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}</section>
+
+
+    <xfooter>
+      <p>This page is not seen by the public</p>
+    </xfooter>
+
+  </div>
+
+</main>
+{% endblock %}

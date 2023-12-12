@@ -1,0 +1,26 @@
+<div class="video-container">
+{% if data.widget.embed == 'no-embed' %}
+    <video controls crossorigin playsinline id="js-player" poster="{% if data.widget.thumbnailOption == 'thumbnail-url' %}{{ data.widget.thumbnailVideo }}{% elif data.widget.thumbnailOption == 'thumbnail-image' %}{% set image = apos.images.first(data.widget.thumbnailCustom) %}{{ apos.attachments.url(image , { size : 'full' , edit : false }) }}{% endif %}" style="max-width : 100%; border-radius : 4px;">
+    {% for videoSource in data.widget.videoUrl %}
+        <source src="{{ videoSource.sourceVideo }}" type="video/{{ videoSource.videoType }}" size="{{ videoSource.size }}">        
+    {% endfor %}
+    {% if data.widget.caption %}
+        {% for caption in data.widget.caption %}
+            <!-- Caption files -->
+            <track kind="captions" label="{{ caption.captionName }}" srclang="{{ caption.lang }}" src="{{ caption.caption }}" {{ "default" if caption.defaultCaption }} >
+        {% endfor %}
+    {% endif %}
+
+        <!-- Fallback for browsers that don't support the <video> element -->
+        {# <a href="{{  }}" download>Download</a> #}
+	</video>
+
+{% endif %}
+{% if data.widget.embed == 'youtube-embed' %}
+    <div id="js-player" data-online="on" data-plyr-provider="youtube" data-plyr-embed-id="{{ data.widget.onlineUrl }}"></div>
+{% endif %}
+{% if data.widget.embed == 'vimeo-embed' %}
+    <div id="js-player" data-online="on" data-plyr-provider="vimeo" data-plyr-embed-id="{{ data.widget.onlineUrl }}"></div>
+{% endif %}
+
+</div>

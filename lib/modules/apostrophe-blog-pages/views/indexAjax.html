@@ -1,0 +1,103 @@
+{% import "macros/indexSearch.html" as search with context %}
+{# {% import "macros/linkBreadcrumbs.html" as link %} #}
+{% import "macros/likeIcon.html" as icon %}
+{# Macros (Look on top level view folder) #}
+  {# {% if data.pieces %} #}
+     
+    {# {% endif %} #}
+    {# {{ link.breadcrumbs(data.page) }} #}
+<div class="main-blog-area">
+     
+    <h1>What's Been Happening?</h1>
+    {{ search.searchArea(data.pieces.slug , data.pieces.slug , data) }}
+    <div data-apos-ajax-append >
+        <div class="blog-loop">
+            {% if data.pieces %}
+
+                {% for month, piece in data.pieces | sort(true, false, 'publishedAt') | groupby('monthGroup') %}
+                    {% if piece | last %}
+                        <div class="end-container" >
+                            <div class="line-end"></div>
+                            <p class="" style="margin:0 auto; text-align:center; margin : 22.5px 0;">{{
+                    month
+                    }}</p>
+                            <div class="line-end"></div>
+                        </div>
+                    {% endif %}
+                    {% for finalPiece in piece %}
+                        {% set image = apos
+                            .images
+                            .first(finalPiece.blogThumbnail) %}
+                        {# For pieces #}
+                        <a href="{{ finalPiece._url }}" class="directory">
+                            <div class="blog-item-index">
+                                {% if image %}
+                                    <div class="thumbnail-blog-area-index" style="background-image:url({{ apos.attachments.url(image , {size : 'one-third'}) }}); 
+                           {% if apos.attachments.hasFocalPoint(image) %}
+                           background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};
+                           {% else %}
+                           background-position: 50% 50%;
+                           {% endif %}
+                            background-repeat: no-repeat;
+                       
+                            background-size:cover;">
+                                   
+                                </div>
+                                 {% endif %}
+                                <div class="content-blog-area-index" data-piece-id="{{ finalPiece._id }}">
+                                    <div>
+                                     {% if finalPiece
+                                        ._myLikes[0]
+                                        .numberLikes %}
+                                        {# <div class="likes-index-index normal-text "> #}
+
+                                        <span class="likes-index-text " style="position: relative;float:right;">
+                                            <smaller>{{finalPiece._myLikes[0].numberLikes }}+&nbsp;<img src="/img/clap.svg" style="width:32px;padding:0;vertical-align:middle;"></smaller>&nbsp;&nbsp;</span>
+                                        {# </div> #}
+
+                                    {% endif %}
+                                       {% if finalPiece
+                                        ._comments[0]
+                                        .comments %}
+                                        {# <div class="likes-index-index normal-text "> #}
+
+                                        <span class="likes-index-text " style="position: relative;float:right;">
+                                            <smaller>{{finalPiece._comments.length }}+&nbsp;<img src="/img/comment.svg" style="width:32px;padding:0;vertical-align:middle;"></smaller>&nbsp;&nbsp;</span>
+                                        {# </div> #}
+
+                                    {% endif %}
+                                        <h3 >{{ finalPiece.title | truncate(40, true, "...") }}</h3>
+  
+                                    </div>
+                                    {# <p></p> #}
+                                    <div class="paragraph">
+                                        {{ apos.areas.plaintext(finalPiece.blogBody , { limit : 450 , ellipsis : '...' }) }}
+
+                                    </div>
+                                 
+                                </div>
+
+                            </div>
+                        </a>
+                    {% endfor %}
+
+                {% endfor %}
+            {% endif %}
+            {% if data.pieces.length == 0 %}
+                <div class="notFound">
+                    <h3>Sorry nothing found !</h3>
+                    <p>Try another search</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {# Load More button. Also outside data-apos-ajax-append, so it gets refreshed #}
+    {% if data.currentPage < data.totalPages %}
+        {# "Load More" button with the "append=1" flag #}
+        <li class="load-more">
+            <a data-apos-ajax-infinite-scroll href="{{ data.url | build({ page: data.currentPage + 1, append: 1 }) }}">Load
+                More...</a>
+        </li>
+    {% endif %}
+
+</div>

@@ -1,0 +1,23 @@
+{% import "macros/widgets.html" as widget %}
+{% extends "layout.html" %}
+
+
+{% block main %}
+<main id="barba-wrapper">
+
+  <div class="barba-container" data-namespace="main{{data.piece._id}}">
+    <section class="main-content">
+      <div class="blocky" style="padding:5%">
+       {{ widget.postWidget(data.piece , 'nsection') }}
+        {# {{base.base(data.piece,true)}} #}
+      </div>
+    </section>
+    <xfooter>
+      <p>This page is not directly seen by the public, 5% paddding has been added so menu items are not hidden(not on
+        template)</p>
+    </xfooter>
+
+  </div>
+
+</main>
+{% endblock %}

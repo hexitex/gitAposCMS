@@ -1,0 +1,104 @@
+{# {% import "macros/likeIcon.html" as icon %} #}
+{% import "macros/indexSearch.html" as search with context %}
+{# {% import "macros/linkBreadcrumbs.html" as link %} #}
+
+<div class="main-prod-area">
+
+  {# {{ link.breadcrumbs(data.page) }} #}
+
+  <h2>{{ __('Products') }}</h2>
+  {{ search.searchArea(data.pieces.slug , data.pieces.slug , data) }}
+
+  <div data-apos-ajax-append class="prod-loop">
+
+    <div class="prod-widget-container">
+
+      {% for fpiece in data.pieces %}
+        {# {{fpiece|dump}} #}
+        {% set subcatok = false %}
+        {% if data.subcats and 'ecomcategories' in data.url%}
+          {% set subcatok = false %}
+        {% else %}
+          {% set subcatok = true %}
+        {% endif %}
+        {%set rendered=0%}
+        {% if subcatok==false%}
+          {% for subcat in data.subcats %}
+            {% for fsubcat in fpiece.ecomsubcategoriesIds %}
+              {# {{subcat._id}} == {{fsubcat}}<br/> #}
+              {% if subcat._id == fsubcat %}
+                {% set subcatok = true %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+
+        {% if subcatok == true %}
+          {%set rendered=rendered+1%}
+          {% if fpiece | first %}
+            {# <div class="line-end"></div> #}
+            <p class="" style="margin:0 auto; text-align:center; margin : 22.5px 0;">{{fpiece.ecomsubcategories.title}}</p>
+            {# <div class="line-end"></div> #}
+          {% endif %}
+
+          {% set image = apos
+            .images
+            .first(fpiece.image) %}
+          <div class="prod-widget-frame">
+
+            <a href="{{ fpiece._url }}" data-namespace="prods" class="prod-link directory">
+
+              <div class="prod-widget-item" style="{% if image %} background-image:url(.{{ apos.attachments.url(image , {size : '600-300'}) }}); {% if apos.attachments.hasFocalPoint(image) %} background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }}; {% endif %} {% endif %}"></div>
+
+              <div class="content-prod-area" data-piece-id="{{ fpiece._id }}">
+
+                <h4 class="font-outline">
+                  {{ fpiece.title | truncate(40, true, "...") }}
+                </h4>
+
+                <h5>
+                  {% if fpiece.discount %}
+                    <del class="prod-discount">{{ data.global.currency }}{{fpiece.price.toFixed(2)}}</del>&nbsp;&nbsp;&nbsp;{% endif %}
+                  {{ data.global.currency }}{{fpiece.total}}
+                </h5>
+
+                <p class="white-text">{{ apos.areas.plaintext(fpiece.description , { limit : 60 , ellipsis : '...' }) }}</p>
+                {# {%set reviewsCount=0%} #}
+                {% if fpiece._reviews %}
+                  {%set reviewsCount=fpiece._reviews.length%}{%set wating=0%}
+
+                  {% for revs in fpiece._reviews %}
+                    {% set wating = wating + revs.ratings %}
+                  {% endfor %}
+
+                  {# <div class="white-text font-outline review-prod-area" ><span style="float:left"></span>{{reviewsCount}} reviews {{ apos.reviewForm.stars(wating/reviewsCount,5,true,true)|safe}}</div> #}
+                {% else %}
+                  {%set wating=0%}
+                  {%set reviewsCount=0%}
+                {% endif %}
+                <div class="white-text font-outline review-prod-area" >
+                  <span style="float:left">{{fpiece.brand}}</span>{{reviewsCount}} reviews {{ apos.reviewForm.stars(wating/reviewsCount,5,true,true)|safe}}</div>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% if data.pieces.length == 0 %}
+      <div class="notFound">
+        <h1>Sorry nothing found !</h1>
+        <p>Try another search</p>
+      </div>
+    {% endif %}
+
+    {% if data.currentPage < data.totalPages %}
+      <a data-apos-ajax-infinite-scroll href="{{ data.url | build({ page: data.currentPage + 1, append: 1 })}}"></a>
+      {# <a href="{{ data.url | build({ page: data.currentPage + 1, append: 1 }) }}">Load More...</a> #}
+    {% endif %}
+    {% if rendered < 1 %}
+      {{ data.url | build({ page: data.currentPage + 1, append: 1 })}}
+    {% endif %}
+
+  </div>
+
+</div>

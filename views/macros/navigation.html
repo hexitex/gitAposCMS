@@ -1,0 +1,171 @@
+{% macro nav(data) %}
+
+<div class="xxnav">
+    <div class="xxnav-header" >
+        <div class="xxnav-title">
+      
+            <a href="{{ data.home._url }}">
+            {% if data.global.favicon %}
+            <img class="smalllogo" src='{{ apos.attachments.url(data.global.favicon, { size: 'one-sixth' }) }}' alt="logo"/>
+            {% endif %}
+              <div class="tag-line">
+            {{data.global.tagline}}</div>
+            </a>
+        </div>
+    </div>
+    <div class="xxnav-btn">
+        <label for="xxnav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+    <input type="checkbox" id="xxnav-check">
+    <div class="xxnav-links">
+    {# <a href="{{ data.home._url }}">{{ data.home.title }}</a> #}
+
+ {# for navsections #}
+ 
+ 
+     {% for itm in data.page.widgets.items %}
+    
+    {% if itm.type=='section' %}
+    
+       {% if itm.showInNav %}
+        <a href="#{{ itm.navName | css }}" class="hover-underline-animation here-tab"  onclick="document.getElementById('xxnav-check').checked=false;">
+             {% if itm.altNavName %} 
+              {{ itm.altNavName }}
+             {%else%}
+             {{ itm.navName }}
+             {%endif%}
+        </a>           
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+
+    {% for tab in data.home._children %}
+           
+        {% if tab %} 
+            {% if tab.title != data.page.title %}
+                <a href="{{ tab._url }}" class="hover-underline-animation child-tab" onclick="UTILS.pageTop()" style="{% if tab.title == "Search" %}display:none;{% endif %}">
+                    {{ tab.title }}
+                </a>
+            {% else %}
+                {% for tabx in tab._children %}
+                    {% if tabx %}
+                        {% if tabx.title != data.page.title %}
+                        <!--  <a href="{{ tabx._url }}" class="list-tabs child-tab" style="{% if tabx.title == "Search" %}display:none;{% endif %}"> -->
+                             <a href="{{ tabx._url }}" class="hover-underline-animation child-tab" >
+                                {{ tabx.title }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+   {#} <a href="" class="list-tabs font-3d-float child-tab" onclick="UTILS.pageTop()">Langauge</a>{#}
+{# 
+{% if data.user %}
+        <small><small>Welcome {{data.user.firstName}} <a href="/logout">Logout </a></small></small>
+    {% endif %} #}
+ 
+   {# <dl id="sample" class="dropdown ">
+        <dt tog="yes"><a href="#"><img class="flag" src="/img/{{apos.workflow.lang()}}.png" alt="" /></a></dt>
+        <dd tog="yes">
+            <ul >
+            {% for localization in apos.workflow.localizations() %}
+           <li><a tog="yes" onClick="$.post('{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}')" href="#"><img class="flag" src="/img/{{ localization.workflowLocale }}.png" alt="" /><span class="value">{{localization.name}}</span></a></li>
+            {% endfor %}
+
+            </ul>
+        </dd>
+    </dl>       #}
+     {# for signup #}
+    {# {% set signup = data.page.widgets.items | findObject(["type","email-signup-section"]) %}
+        {% if signup %}
+            <a href="#{{signup.emailSignupTitle | css }}"  onClick="document.getElementById('xxnav-check').checked=false">
+            {{ signup.emailSignupTitle }}
+            </a>
+        {% endif %}
+         #}
+    {# for signin #}
+    {# {% if not data.user %}
+        <a href="/login">Login</a>
+    {% endif %} #}
+    {# for signout #}
+   
+    {# </div> #}
+  
+    {# {% set activeLocale = apos.workflow.lang() %} #}
+{# </div> #}
+{# <div>{{data|dump}}</div> #}
+
+  {% if data.cartitems > 0 %}
+  {# {%set carttot=0%}
+ 
+  {% for p in data.cartitems %}
+      {% set carttot=+p.quantity%}
+  {% endfor %} #}
+         <a href="/cart"  class="hover-underline-animation child-tab"><span class="fa fa-fw fa-cart-plus" style="font-size:24px;color:orange"> </span><span style="font-size:12px;color:orange">{{ data.cartitems}}</span></a>
+    {% endif %}
+    </div>
+      </div>
+{% if data.page._ancestors.length>0  %}  
+       <div class="breadcrumbs-position font-outline">
+        {% for ancestor in data.page._ancestors %}
+            {# To access ancestor of current page #}
+
+            <a href="{{ ancestor._url }}">
+                {{ ancestor.title }}</a> <i class="fa fa-caret-right"></i>
+       
+    {% endfor %}
+        {# <a href="{{ page._url }}">
+            {{ page.title }}</a> #}
+        {% if data.piece  %}
+            <a href="{{ data.page._url }}">
+                {{ data.page.title }}</a>
+            <i class="fa fa-caret-right"></i> {{ data.piece.title | capitalize }}
+        {% else %}
+            {# <a href="{{ page._url }}"> #}
+                {{ data.page.title }}
+                {# </a> #}
+        {% endif %}
+    </div>
+    {% endif %}
+   {# <dl id="sample" class="dropdown ">
+        <dt tog="yes"><a href="#"><img class="flag" src="/img/{{apos.workflow.lang()}}.png" alt="" /></a></dt>
+        <dd tog="yes">
+            <ul >
+            {% for localization in apos.workflow.localizations() %}
+           <li><a tog="yes" onClick="$.post('{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}')" href="#"><img class="flag" src="/img/{{ localization.workflowLocale }}.png" alt="" /><span class="value">{{localization.name}}</span></a></li>
+            {% endfor %}
+
+            </ul>
+        </dd>
+    </dl>       #}
+
+
+    
+   
+    {# for signup #}
+    {# {% set signup = data.page.widgets.items | findObject(["type","email-signup-section"]) %}
+        {% if signup %}
+            <a href="#{{signup.emailSignupTitle | css }}"  onClick="document.getElementById('xxnav-check').checked=false">
+            {{ signup.emailSignupTitle }}
+            </a>
+        {% endif %}
+         #}
+    {# for signin #}
+    {# {% if not data.user %}
+        <a href="/login">Login</a>
+    {% endif %} #}
+    {# for signout #}
+   
+    {# </div>
+  
+    {% set activeLocale = apos.workflow.lang() %}
+</div> #}
+ 
+{% endmacro %}

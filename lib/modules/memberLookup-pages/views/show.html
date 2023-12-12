@@ -1,0 +1,44 @@
+{# Automatically extends the right outer layout and also handles AJAX siutations #}
+{% extends "layout.html" %}
+{% extends data.outerLayout %}
+
+{# {% block locale %}{{ apos.modules['apostrophe-workflow'].lang() }}{% endblock %} #}
+{% block beforeMain %}
+{% endblock %}
+
+
+
+{% block main %}
+    <section class="body-content">
+        <div class="show-content-area">
+
+        
+            {% set image = apos
+                .images
+                .first(data.piece.photo) %}
+            {#% set textCount = data.piece.title %#}
+            <style type="text/css">table th, table td {border:1px solid #fff;padding:0.5em;}</style>
+            <table style="max-width:3in;width:3in;max-height:2in;height:2in;font-size:10px;">
+                <tr><td style="padding:5px;" colspan="2" >Weekend Wanderers Metal Detecting Club &nbsp;<img style="max-height:0.20in;vertical-align: bottom;" src="/img/logo.svg"></td></tr>
+                <tr><td style="vertical-align:top;padding:5px;max-height:1.2in;font-size:9px;text-align:center;width:1.5in"><img width="80px" src="..{{ apos.attachments.url(image, {size : '350'}) }}"><br/>{{ data.piece.title }}</td><td style="padding:5px;vertical-align:top;text-align:center;width:1.5in"><img style="max-height:1.25in" src="{{ data.piece.qrcode}}"></td></tr>
+                <tr><td style="padding:5px">MID:{{ data.piece.memberNumber }}</td><td style="padding:5px">Exp: {{data.piece.expDate|date("Do MMM YYYY") }}</tr>
+            </table>
+
+
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block afterMain %}
+ 
+    
+{% endblock %}
+
+
+
+
+
+
+
+

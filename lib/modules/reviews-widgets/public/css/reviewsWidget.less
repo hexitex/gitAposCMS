@@ -1,0 +1,102 @@
+@font : 18.62px;
+
+.star-me-on {
+  transition: color 0.5s ease;
+  color     : orange !important;
+}
+
+.star-me {
+  transition: color 0.5s ease;
+  color     : #ededed;
+}
+
+.smallIcons>.forTheStars>.star-me {
+  font-size: 0.75rem !important;
+}
+
+.review-widget {
+  margin   : auto;
+  display  : flex;
+  flex-wrap: wrap;
+
+  label {
+    display: inline-block;
+    width  : 200px;
+  }
+
+  &>textarea {
+    width        : 100%;
+    padding      : 22px 53px;
+    margin       : 20px 0;
+    background   : none;
+    border       : none;
+    border-bottom: @inputBorder;
+    color        : @inputTextColor;
+    font-family  : @mainFont;
+    font-size    : @font;
+    height       : 95px;
+  }
+
+  .thank-you {
+    display: none;
+  }
+
+  &>input {
+    padding      : 10px 56px;
+    background   : none;
+    border       : none;
+    border-bottom: @inputBorder;
+    color        : @inputTextColor;
+    font-family  : @mainFont;
+    font-size    : @font;
+    margin       : 20px 0;
+  }
+
+  margin-bottom: 100px;
+}
+
+
+.leave-review {
+  color        : @mainColor;
+  width        : 100%;
+  font-size    : 28px;
+  line-height  : 39px;
+  margin-bottom: 3%;
+  margin-top   : 3%;
+}
+
+
+.reader-review {
+  color      : @secondColor;
+  font-size  : 16.00px;
+  font-family: @mainFont;
+  line-height: 34px;
+}
+
+.review-date {
+  color    : @subtitleColor;
+  font-size: 12px;
+}
+
+.review-paragraph {
+  font-size  : 18.62px;
+  color      : #9B9B9B;
+  font-family: @mainFont;
+  line-height: 26px;
+}
+
+.review-piece {
+  width        : 45%;
+  height       : 100%;
+  margin-bottom: 40px;
+  margin-right : 5%;
+}
+
+@media only screen and (max-width:900px) {
+ 
+  .review-piece {
+    width       : 100%;
+    height      : auto;
+    margin-right: 0;
+  }
+}

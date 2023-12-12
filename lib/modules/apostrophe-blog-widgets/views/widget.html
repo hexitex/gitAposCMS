@@ -1,0 +1,38 @@
+{% import "macros/likeIcon.html" as icon %}
+
+    <div class="blog-widget-container">
+        <!-- Slides -->
+        {% if data.widget._pieces %}
+                   {% set leng=data.widget._pieces.length %}
+            {% for d in data.widget._pieces | sort(true, false , 'publishedAt') %}
+                {% set image = apos.images.first(d.blogThumbnail) %}
+                {% set imageSizee = d.blogThumbnail.imageSize %}
+                <div class="blog-widget-frame" >
+                <a href="{{ d._url }}" data-namespace="blogWidget" class="directory">
+                 {# {{ apos.singleton(data.piece, 'blogHeader', 'apostrophe-images' , { size : 'full', edit : false }) }} #}
+                {{imageSizee|dump}}
+                    <div class="blog-widget-item" style="{% if image %} background-image:url(.{{ apos.attachments.url(image, {size : 'one-third'}) }}); {% if apos.attachments.hasFocalPoint(image) %}background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};{% endif %}{% endif %}">
+                     {# <div class="blog-widget-item" style="{% if image %} background-image:url(.{{ apos.attachments.url(apos.singleton(apos.images.first(d),  'apostrophe-images' , { size : 'full', edit : false }) ) }}); {% if apos.attachments.hasFocalPoint(image) %}background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};{% endif %}{% endif %}"> #}
+                    </div>
+                     
+                    <div class="content-blog-area" data-piece-id="{{ d._id }}">
+                        {% if d._myLikes[0].numberLikes %}
+                            <div class="likes-index">
+                                <span class="likes-index-text white-text font-outline">+{% if d._myLikes[0].numberLikes === 1 %}{{ d._myLikes[0].numberLikes }} {% else %}{{ d._myLikes[0].numberLikes }}! {% endif %}&nbsp;</span>{{ icon.likeIndex() }}
+                            </div>
+                        {% else %}
+                            <div class="likes-index">
+                                <span class="likes-index-text white-text font-outline">No applause yet</span>
+                                {# {{ icon.unlikeIndex() }} #}
+                            </div> 
+                        {% endif %}
+                        <h3 class="white-text font-outline">{{ d.title | truncate(150, true, "...") }}</h3>
+                        <p class="white-text font-outline">{{ apos.areas.plaintext(d.blogBody , { limit : 100 , ellipsis : ' ...' }) }}</p>
+                    </div>
+                </a>
+                </div>
+                                 
+            {% endfor %}
+        {% endif %}
+    </div>
+      

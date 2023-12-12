@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{# {% import "macros/linkBreadcrumbs.html" as link %} #}
+{% import "macros/widgets.html" as widget with context %}
+{% import "macros/previousNext.html" as next %}
+{% import "macros/postScroll.html" as info %}
+
+
+{% block extraHead %}
+{# OPEN GRAPH #}
+{% include "apostrophe-open-graph:view.html" %}
+{{ super() }}
+{% endblock %}
+
+{% block beforeMain %}
+<style>html{visibility: hidden;}</style>
+  <header>
+      {{ super() }}
+  
+        <aside class="post-display" style="max-width:100% !important">
+            {{ info.scroll(data) }}
+        </aside>
+        {% if data.piece.blogConfig === "like" or data.piece.blogConfig === "both" %}
+            <aside>
+                {{ apos.singleton(data.piece , 'enableLikes' , 'likes') }}
+            </aside>
+        {% endif %}
+       
+  </header>
+{% endblock %}
+
+{% block main %}
+    <main id="barba-wrapper">
+        <div class="barba-container " data-namespace="blog-show">
+          <div class="banner-area">
+                        {{ apos.singleton(data.piece, 'blogHeader', 'apostrophe-images' , { size : 'full', edit : false }) }}
+                    </div>
+                     {# {{ link.breadcrumbs(data.page , data.piece) }} #}
+            <section class="body-content">
+            
+                <div class="show-content-area">
+                 
+                  
+                      {# {% if data.piece %}
+                            {{ link.breadcrumbs(data.page , data.piece) }}
+                        {% endif %} #}
+                  
+                    <div class="title-area">
+                        {% set textCount = data.piece.title %}
+                        <h1 class="show-content-title font-outline" >{{ data.piece.title }}</h1>
+                    </div>
+                      
+                     
+                    <div class="tags-show-area">
+                        {% for tags in data.piece.tags %}
+                            <div class="tag-item ">#{{ tags | capitalize }}</div>
+                        {% endfor %}
+                    </div>
+                   
+                    <article class="article-area">
+                        {{ widget.postWidget(data.piece , 'blogBody') }}
+                      
+                    </article>
+                      {% if data.piece.blogConfig === "comment" or data.piece.blogConfig === "both" %}
+                        <section class="comment-area" id="comment">
+                             {% if data.piece._comments %}
+                                <div class="comment-container">
+                                    {% for piece in data.piece._comments %}
+                                        <div class="comment-piece">
+                                            <img src="/img/logo.svg" width="32px"><h4 class="reader-comment">{{ piece.readerName }} <span class="comment-date">- {{ piece.date | date("Do MMM YYYY") }}</span></h4>
+                                            <p class="comment-paragraph">{{ piece.comments }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {{ apos.singleton(data.piece , 'enableComments' , 'comments') }}
+                       
+                        </section>
+                    {% endif %} 
+                    <section class="end-section" id="esid" style="{{ "display:none;" if not data.previous and not data.next }}">
+                        <div class="title-center">
+                            <h1 class="title-read">
+                            
+                            {% if data.next and data.previous %}
+                               What about the following?
+                                {% elif data.next or data.previous %}
+                                    This might be interesting!
+                            {% endif %}
+                            </h1>
+                            
+                        </div>
+                        {{ next.link(data) }}
+                        
+                       
+                    </section>
+                      
+                  
+                </div>
+            </section>
+</main>
+{% endblock %}

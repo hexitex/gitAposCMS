@@ -1,0 +1,35 @@
+{#
+  This file extends Apostrophe's outerLayoutBase template, which we don't recommend
+  overriding directly. Changes in this file, if any, are usually block overrides to
+  modify the outer chrome, outside the main content area of the page. Most of the
+  time you should just edit `layout.html` in the top level `views/` folder.
+#}
+
+{% extends "outerLayoutBase.html" %}
+
+{% block apostropheMenu %}
+
+  {% if data.user._permissions.edit %}
+    {{ apos.adminBar.output() }}
+  {% endif %}
+{% endblock %}
+{# {% block locale %}{{ apos.modules['apostrophe-workflow'].lang() }}{% endblock %} #}
+{% block extraHead %}
+
+{% if data.global.favicon %}
+ <link rel="shortcut icon" href="{{ apos.attachments.url(data.global.favicon, { size: 'one-sixth' }) }}" type="image/x-icon">  
+
+{% endif %}
+  
+{% endblock %}
+
+{% block beforeMain %}
+
+{% endblock %}
+
+{% block extraBody %}
+<script>document.getElementsByTagName("html")[0].style.visibility = "visible";</script>
+
+{% endblock %}
+
+

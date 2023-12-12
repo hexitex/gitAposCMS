@@ -1,0 +1,20 @@
+{# in lib/modules/contact-form-widgets/views/widget.html #}
+{% import "apostrophe-schemas:macros.html" as schemas %}
+
+<form class="comment-widget" id="{{ data.piece._id }}" data-slug="{{ data.piece.slug }}" data-title="{{ data.piece.title }}" data-comment-form>
+<h4 class="leave-comment">Leave a comment</h4>
+
+<input type="hidden" name="postId" value="">
+<input type="hidden" name="date" value="">
+  {% for piece in data.comments %}
+    {% if piece.name!='postId' and piece.name!='date'%}
+     {{ schemas.stringBody(piece) }}    
+    {%endif%} 
+  {% endfor %}
+  <input type="hidden" name="_id" value="{{ data.widget._id }}">
+  <button type="submit" class="submitContact">Submit</button>
+  {# Later gets hoisted out and becomes visible #}
+  <div class="thank-you" data-thank-you>
+    <h4>Thanks!</h4>
+  </div>
+</form>

@@ -1,0 +1,62 @@
+{
+  "_from": "apostrophe-link-widgets@^1.0.5",
+  "_id": "apostrophe-link-widgets@1.0.5",
+  "_inBundle": false,
+  "_integrity": "sha512-xFDjsuTl/D3DfjVmpOmu7gvKd7oM/Am2BH7kkaERIDiQ48vta0cZcgOBx31UiDtH4cULVzF8IrPds7FXVfq6YQ==",
+  "_location": "/apostrophe-link-widgets",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "apostrophe-link-widgets@^1.0.5",
+    "name": "apostrophe-link-widgets",
+    "escapedName": "apostrophe-link-widgets",
+    "rawSpec": "^1.0.5",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.5"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/apostrophe-link-widgets/-/apostrophe-link-widgets-1.0.5.tgz",
+  "_shasum": "520da7727e9c8e155d89bea608fe98a6156d3b41",
+  "_spec": "apostrophe-link-widgets@^1.0.5",
+  "_where": "D:\\oldbbag\\priortomatversion\\bbag",
+  "author": {
+    "name": "P'unk Ave"
+  },
+  "bugs": {
+    "url": "https://github.com/punkave/apostrophe-link-widgets/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Link widgets for ApostropheCMS",
+  "devDependencies": {
+    "eslint": "^4.2.0",
+    "eslint-config-punkave": "^1.0.8",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "homepage": "https://github.com/punkave/apostrophe-link-widgets#readme",
+  "keywords": [
+    "ApostropheCMS",
+    "Link",
+    "Widget"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "apostrophe-link-widgets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/punkave/apostrophe-link-widgets.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.5"
+}

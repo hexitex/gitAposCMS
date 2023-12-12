@@ -1,0 +1,5 @@
+{%- extends "managerModalBase.html" -%}
+{# My Custom Extend. No need to push. As long as the name of the file is similar to original node_modules #}
+{%- block instructions -%}
+  {{ __('Here you can add new %s or click on existing ones to edit them.', __(data.options.pluralLabel |  d(''))) }}
+{%- endblock -%}

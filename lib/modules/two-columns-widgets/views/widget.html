@@ -1,0 +1,9 @@
+{% import "macros/widgets.html" as widget %}
+<div class="two-container-column{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %}">
+    <div class="two-column-one{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %} {% if data.widget.ratio %}two-column-one-ratio{{ data.widget.ratio }}{% endif %}" style="{% if data.widget.marginBetween %}margin-right :{{ data.widget.marginBetween }}px;{% endif %} {% if data.widget.marginBottom %}margin-bottom :{{ data.widget.marginBottom }}px;{% endif %}">
+        {{ widget.postWidget(data.widget , 'columnOne') }}
+    </div>
+    <div class="two-column-two{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %} {% if data.widget.ratio %}two-column-two-ratio{{ data.widget.ratio }}{% endif %}" style="{% if data.widget.marginBottom %}margin-bottom :{{ data.widget.marginBottom }}px;{% endif %}">
+        {{ widget.postWidget(data.widget , 'columnTwo') }}
+    </div>
+</div>

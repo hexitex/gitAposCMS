@@ -1,0 +1,19 @@
+{% import "apostrophe-blog-pages:macros/miniIcons.html" as mini %}
+{% macro scroll(data) %}
+    {% set both = data.piece.blogConfig === "both" %}
+    {% set like = data.piece.blogConfig === "like" %}
+    {% set comment = data.piece.blogConfig === "comment" %}
+    <div class="display-box">
+        <div class="post-scroll" onscroll="scrolling();"></div>
+        <div class="post-scroll" onscroll="BLOGHELPER.scrolling();"></div>
+        <div class="post-settings">
+            <div class="post-left ">
+                <p class="count {% if like or both %}{% else %}hide{% endif %}"><span class="text-scroll">Applause</span><span class="icon-scroll">{{ mini.minilike() }}</span><span class="like-text" data-piece="{{ data.piece._id }}">+{% if data.likesInfo.numberLikes %}{{ data.likesInfo.numberLikes }}{% else %}0{% endif %}</span></p>
+                {# <a href="#comment" class="{% if comment or both %}{% else %}hide{% endif %}" style="text-decoration : none; color:inherit"><p class="count"><span class="text-scroll">Total Comments : </span><span class="icon-scroll">{{ mini.minicomment() }}</span><span class="comment-text" data-piece="{{ data.piece._id }}">{% if data.allcommentscount %}+{{ data.allcommentscount }}{% elif data.allcommentscount === 0 or not data.allcommentscount %}0{% endif %}</span></p></a> #}
+                <a href="#comment" class="{% if comment or both %}{% else %}hide{% endif %}" onclick="UTILS.anchorTag();" style="text-decoration : none; color:inherit"><p class="count"><span class="text-scroll">Comments </span><span class="icon-scroll">{{ mini.minicomment() }}</span><span class="comment-text" data-piece="{{ data.piece._id }}">{% if data.allcommentscount %}+{{ data.allcommentscount }}{% elif data.allcommentscount === 0 or not data.allcommentscount %}0{% endif %}</span></p></a>
+            </div>
+            <div class="post-read"><p class=""><span class="eta"></span> Read</p></div>
+            <div class="post-right"><span class="text-scroll">Posted </span>{{ data.piece.publishedAt | date("Do MMM YYYY") }}</div>
+        </div>
+    </div>
+{% endmacro %}

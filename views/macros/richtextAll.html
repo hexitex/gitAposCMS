@@ -1,0 +1,114 @@
+    {% macro richtextall() %}
+   
+                    toolbar: ['bold', 'italic', 'Link', 'Unlink', 'Anchor', 'Table', 'BulletedList', 'Strike', 'Subscript', 'Superscript', 'font'],
+                    styles: [
+                        {   name: 'Normal',
+                            element: 'p',
+                            attributes:{'class': 'normal-text'}
+                        },
+                        {   name: 'Highlight Paragraph',
+                            element: 'p',
+                            attributes: {'class': 'highlight'}
+                        },                   
+                        {   name: 'H1',
+                            element: 'h1'
+                        },
+                        {   name: 'H2',
+                            element: 'h2'
+                        },
+                        {   name: 'H3',
+                            element: 'h3'
+                        },
+                        {   name: 'H4',
+                            element: 'h4'
+                        },
+                        {   name: 'H5',
+                            element: 'h5'
+                        },
+                        {   name: 'H6',
+                            element: 'h6'
+                        },
+                        {   name: 'Inline Span',
+                            element: 'span',
+                            attributes: {'class': 'normal-text'}
+                        },
+                        {   name: 'Section Heading',
+                            element: 'span',
+                            attributes: {'class': 'section-headings'}
+                        },
+                        {   name: 'Sub-Heading',
+                            element: 'span',
+                            attributes: {'class': 'subheading'}
+                        },
+                        {   name: 'Hero Title',
+                            element: 'span',
+                            attributes: {'class': 'hero__title'}
+                        },
+                        {   name: 'Big Hero Title',
+                            element: 'span',
+                            attributes: {'class': 'hero__title--1'}
+                        },
+                        {   name: 'Hero Sub-Title',
+                            element: 'span',
+                            attributes: {'class': 'hero__subtitle'}
+                        },
+                        {   name: 'Hero Subtitle CAPS',
+                            element: 'span',
+                            attributes: {'class': 'hero__subtitle--1'}
+                        },
+                        {   name: 'Base Color',
+                            element: 'span',
+                            attributes: {'class': 'normal-text'}
+                        },
+                        {   name: 'Add White',
+                            element: 'span',
+                            attributes: {'class': 'white-text'}
+                        },
+                        {   name: 'Add Green',
+                            element: 'span',
+                            attributes: {'class': 'green-text'}
+                        },
+                          {   name: 'Add Hightlight Colour',
+                            element: 'span',
+                            attributes: {'class': 'orange-text'}
+                        },
+                         {   name: 'Add Red',
+                            element: 'span',
+                            attributes: {'class': 'red-text'}
+                        },
+                        {   name: 'Add Grey',
+                            element: 'span',
+                            attributes: {'class': 'grey-text'}
+                        },
+                        {   name: 'Add Subheading Color',
+                            element: 'span',
+                            attributes: {'class': 'high-text'}
+                        },
+                        {   name: 'Highlighter',
+                            element: 'span',
+                            attributes: {'class': 'highlight'}
+                        },
+                        {   name: 'Outline',
+                            element: 'span',
+                            attributes: {'class': 'font-outline'}
+                        },
+                        {   name: 'Multi Shadows',
+                            element: 'span',
+                            attributes: {'class': 'font-shadow-multiple'}
+                        },
+                        {   name: '3D Float',
+                            element: 'span',
+                            attributes: {'class': 'font-3d-float'}
+                        },
+                        {   name: '3D',
+                            element: 'span',
+                            attributes: {'class': 'font-3d'}
+                        },
+                        {   name: 'Emboss',
+                            element: 'span',
+                            attributes: {'class': 'font-emboss'}
+                        }
+                    ],
+                    
+
+{% endmacro %}

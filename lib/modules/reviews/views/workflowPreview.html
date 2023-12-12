@@ -1,0 +1,30 @@
+{% if data.reviews.reviews %}
+<div class="review-container" style="background-color : #deffde;">
+        {% for piece in data.reviews.reviews %}
+            <div class="review-piece">
+                <h4 class="reader-review">{{ piece.readerName }} <span class="">- {{ piece.date | date("Do MMM YYYY") }}</span></h4>
+                <p class="review-paragraph">{{ piece.review }}</p>
+            </div>
+        {% endfor %}
+</div>
+{% elif data.reviews.reviews | length and [] %}
+<div class="review-container" style="background: #ff8d8d;">
+        <p class="review-paragraph" >There are no new reviews</p>
+</div>
+{% endif %}
+{{ apos.log(data.reviews.reviews | length) }}
+{{ apos.log(data.reviews.reviews) }}
+{% if data.reviewsBefore.reviews %}
+<div class="reviews-container" style="background: #ff8d8d;">
+        {% for piece in data.reviewsBefore.reviews %}
+            <div class="review-piece">
+                <h4 class="reader-review ">{{ piece.readerName }} <span class="">- {{ piece.date | date("Do MMM YYYY") }}</span></h4>
+                <p class="review-paragraph" >{{ piece.review }}</p>
+            </div>
+        {% endfor %}
+</div>
+{% elif data.reviewsBefore.reviews | length and [] %}
+<div class="review-container" style="background: #ff8d8d;">
+        <p class="review-paragraph" >There are no previous reviews</p>
+</div>
+{% endif %}

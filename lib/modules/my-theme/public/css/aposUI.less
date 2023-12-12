@@ -1,0 +1,629 @@
+@import "utils/reset.less";
+@import "prefixer.less";
+@import "colors.less";
+.apos-palette-container{
+    top:40px !important;
+}
+.apos-ui .apos-palette__group--active>.apos-palette__group-items .apos-palette__field{
+    padding: 5px ;
+
+}
+.apos-area .apos-widget-group-widget
+{
+    font-size: 12px !important;
+    line-height: 12px !important;
+}
+a{text-decoration: dashed;
+color:@buttonBackgroundColor;}
+option,
+.apos-ui,
+.apos-ui .apos-button,
+.apos-ui .apos-text-normal,
+.apos-ui .apos-field-label 
+{
+    font-family: @mainFont !important;
+    font-size: @mainSize !important;
+font-style: @mainStyle;
+}
+// Override Apos Global Busy
+// Background Spinner Color
+div[data-footerarea-edit-view]
+{
+    width:100vw;
+}
+.apos-global-busy{
+    background-color:rgba(38, 0, 255, 0.2) !important;
+}
+.apos-area-widget-controls .apos-button--in-group{
+    font-size:12px !important;
+    padding: 2px !important;
+}
+// Spinner Color (Apos Global Busy)
+.apos-global-busy::after{
+    color : @fourthColor !important;
+}
+.apos-ui.apos-modal .apos-modal-header .apos-modal-filters .apos-modal-filter, .apos-ui.apos-modal .apos-modal-body .apos-modal-filters .apos-modal-filter {
+    font-size: 16px;
+   
+}
+.apos-ui .apos-modal-filter--padded{
+    padding:2px;
+}
+.apos-area-widget-controls--context, .apos-area-widget-controls--top-left{
+    top:2px ;
+}
+// Modal Override
+.apos-modal-body::-webkit-scrollbar-thumb {
+    background: @subtitleColor;
+}
+
+// Modal Override
+.apos-modal.apos-versions-modal .apos-versions .apos-version-current .apos-button.apos-button--disabled{
+    color : @secondColor;
+}
+
+// Hover Override
+.apos-ui .apos-table th a:hover, .apos-ui .apos-table td a:hover{
+    color : @aposmainColor;
+}
+::placeholder{
+    color:@placeholderColor;    
+    }
+// Add Tag Button Color
+.apos-ui .apos-manage-tag-add{
+    color : @aposmainColor;
+}
+.apos-ui .apos-field-tags .apos-tags .apos-tag-entry {
+    font-family: @mainFont;
+    font-weight: @mainStyle;
+    font-size: @mainSize;
+  
+    font-size: 12px;
+    border: 1px solid #9a8e78;
+    border-radius: 5px;
+    border-bottom-left-radius: 17px;
+    border-top-left-radius: 17px;
+    padding: 8px;
+    padding-left: 14px;
+    background-color: #8e6c00;
+}
+.apos-ui .apos-workflow-locale-picker, .apos-ui .apos-workflow-export-locales {
+   
+    height: 100%;
+  }
+.apos-manage-select-everything{
+    color : @aposmainColor;
+}
+.apos-ui .apos-dropdown-item {
+    padding-top: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+// Override admin bar color
+.apos-ui .apos-admin-bar{
+    background-color: @aposButtonBackgroundColor;
+    border:1px solid @aposBorderColor;
+    color : @aposAdminBarText;
+}
+.apos-admin-bar{
+    background-color: black !important;
+   
+}
+.apos-admin-bar-item-inner{
+    color:@menuTextColor;
+}
+.apos-admin-bar-item{
+    background-color: black !important;
+    color : @subtitleColor !important;
+}
+// For Override Submit & Commit
+a.apos-button.apos-button--in-group{
+    // Bypass the border override
+    border : none;
+}
+// .apos-area-widget{
+//     background-color:@fourthColor;
+// }   
+// Override Submit & Commit Hover
+.apos-ui .apos-button--in-group:hover{
+    color : #fff !important;
+}
+.apos-ui [data-apos-trash-item].apos-button {
+    color:@errorColor;
+}
+// Submit & Commit Text Color
+[data-apos-workflow-commit]{
+    color :@aposCommitColor !important;
+}
+ [data-apos-workflow-submit]{
+    color :@aposSubmitColor !important;
+}
+[data-apos-workflow-submitted]{
+    color:@aposBorderColor !important;
+    display: none !important;
+}
+.apos-ui .apos-pager{
+    background-color: @aposButtonBackgroundColor;
+    border:1px solid @aposBorderColor;
+}
+.apos-ui .apos-field-input-range-value{
+    color:#000;
+}
+// Submitted Color
+[data-apos-workflow-submitted]{
+    background : none !important;
+}
+.apos-modal.apos-versions-modal .apos-versions .apos-change {
+    display: block;
+    background-color: #000;
+    border-radius: 7px;
+    border: 1px dotted #ac74e3;
+    padding: 5px;
+    margin: 2px;
+    font-weight: lighter;
+}
+.apos-modal.apos-versions-modal .apos-versions{
+    width:75%;
+}
+// For Locale & Mode Workflow
+.apos-workflow-menu .apos-button{
+  //  border : 2px transparent;
+    display:inline-block;
+}
+.apos-field-label .apos-modal-breadcrumb-item{
+    color:@mainColor;
+}
+.apos-modal.apos-versions-modal .apos-versions .apos-change{
+    background-color: black;
+    border-radius: 20;
+}
+.apos-ui.apos-modal .apos-modal-breadcrumb .apos-modal-breadcrumb-item{
+    color:@mainColor !important;
+    border-bottom: 1px dashed #FF9000 !important;
+
+}
+// Override when nothing is commit (Don't TOUCH !) 
+.apos-workflow-menu .apos-button--group {
+   // border: 2px solid white !important;
+    background-color: #a5a8bd;
+}
+
+// For Active/Focus Clicked Admin Bar
+.apos-ui .apos-admin-bar-item .apos-active{
+    background-color: @mainColor;
+}
+
+// For Hover Admin Bar
+.apos-ui .apos-admin-bar-item:hover{
+    background-color: @adminBarHoverColor;
+}
+
+// For checkbox Manager Modal
+.apos-ui .apos-field-input-checkbox:checked + .apos-field-input-checkbox-indicator{
+    border-color : @aposButtonBackgroundColor;
+    background : @thirdColor;
+}
+
+// For checkbox choose image modal
+.apos-ui .apos-manage-grid-view .apos-manage-grid-piece.apos-focus .apos-field-input-checkbox-indicator{
+    border-color : @aposButtonBackgroundColor;
+    background : @thirdColor;
+}
+
+// For ALL Major Buttons
+
+.apos-modal .apos-schema-tab{
+    color:@aposmainColor;
+}
+// For "Page Menu" Button
+.apos-ui .apos-button--global{
+    background-color: @aposButtonBackgroundColor;
+    border : 2px solid @aposBorderColor;
+}
+
+// For Divider 
+.apos-area-controls .apos-area-divider{
+    background-color: @aposmainColor;
+    box-shadow: 0 0 2px 2px @aposBoxShadowColor;
+}
+
+// For CKEditor
+.cke_inner {
+    border: 1px solid @aposBorderColor !important;
+    box-shadow: 0 0 7px 2px @fourthColor;
+}
+.apos-text-normal{
+    color:@fourthColor;
+}
+.apos-ui .apos-dropdown.apos-dropdown--area-controls > .apos-button::after
+{
+    color:@subtitleColor;
+}
+
+.apos-ui .apos-button{
+   // color:@aposButtonBackgroundColor;
+   border-radius: 4px;
+//border: 0;
+}
+.apos-ui .apos-button--major{
+    background-color: @aposButtonBackgroundColor;
+     border : 2px solid @aposBorderColor;
+     font-size: 14px;
+ } 
+.apos-ui .apos-button::after{
+    color:@aposButtonBackgroundColor;
+}
+.apos-ui .apos-button:hover{
+   // border-radius: 50px;
+    box-shadow: 0 0 2px 2px @aposBoxShadowColor;
+}
+.apos-ui .apos-chooser-choice:hover
+{ 
+    //border-radius: 50px;
+    background-color:@aposButtonBackgroundColor;
+color: #ffffff !important;
+
+}
+// For Widget Article Column View (Top)
+article.article-area .apos-ui .apos-dropdown.apos-dropdown--area-controls>.apos-dropdown-items {
+    // column-width: 9vw !important;
+   max-width: 5vw !important;
+   padding: 5px !important;
+   font-size: 12px !important;
+}
+
+// For Widget Article Column View (Bottom)
+article.article-area>.apos-area>.apos-area-widgets>.apos-area-widget-wrapper>.apos-ui .apos-dropdown-items {
+   // column-count: 2 !important;
+//    column-width: 9vw !important;
+   max-width: 5vw !important;
+   padding: 5px !important;
+   font-size: 12px !important;
+}
+.apos-dropdown-items {
+    // column-width: 9vw !important;
+   // max-width: 5vw !important;
+    padding: 5px !important;
+    font-size: 12px !important;
+}
+.apos-ui .apos-dropdown-item {
+    padding: 5px;
+}
+.apos-modal-breadcrumb-item,
+.apos-field-label {
+    color:@aposmainColor !important;
+}
+// End override
+.desc { color:#6b6b6b;}
+        .desc a {color:#0092dd;}
+         dl {display:inline;}
+        .dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px;display:inline; }
+      // .dropdown dd { }
+      //  .dropdown a, .dropdown a:visited { color:#816c5b; text-decoration:none; outline:none;}
+        .dropdown a:hover { color:#5d4617;}
+     //   .dropdown dt a:hover { color:#5d4617; border: 1px solid #d0c9af;}
+        .dropdown dt a {display:inline; padding-right:20px;
+                        width:80px;}
+        .dropdown dt a span {cursor:pointer; display:inline; padding:5px;}
+        .dropdown dd ul { background:#e4dfcb none repeat scroll 0 0;  color:#C5C0B0; display:none;
+                          left:0px; padding:5px 0px; top:2px; width:auto; min-width:80px; list-style:none;}
+        .dropdown span.value { display:none;}
+        .dropdown dd ul li a { padding:5px; display:block;}
+        .dropdown dd ul li a:hover { background-color:#d0c9af;}
+        
+        .dropdown img.flag { border:none; vertical-align:middle; margin-left:10px; }
+        .flagvisibility { display:none;}
+        // fix scrolling issue
+.apos-manage-grid-view {
+  
+    overflow:hidden !important;
+}
+.apos-ui .apos-buttons {
+    background: @fourthColor;
+    white-space: nowrap;
+    // -webkit-box-shadow: 0 0 7px 2px rgba(0,191,154,0.5);
+    // -moz-box-shadow: 0 0 7px 2px rgba(0,191,154,0.5);
+    box-shadow: 0 0 1px 2px @aposBoxShadowColor;
+border-radius: 4px;
+border: 2px solid #fff;
+}
+.apos-ui .apos-buttons .apos-button-group {
+    display: inline-block;
+    margin: 0 1px;
+}
+.apos-ui .apos-table table{
+    color:@aposmainColor;
+    font-family: @mainFont;
+    font-size: @mainSize;
+}
+.apos-field-input-select-wrapper 
+.apos-ui.apos-modal .apos-modal-header .apos-modal-filters .apos-modal-filter, 
+.apos-ui.apos-modal .apos-modal-body .apos-modal-filters .apos-modal-filter {
+   
+    color: black;
+}
+.apos-field-input-select-wrapper ::after{
+    color: black;
+
+}
+.apos-ui.apos-modal .apos-modal-header {
+    position: relative;
+    width: 100%;
+    padding: 20px 30px 20px;
+    background-color: @aposButtonBackgroundColor;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 2px solid @aposBorderColor;
+    color:@mainColor;
+   // border-bottom: 2px @aposBoxShadowColor !important;
+}
+.apos-ui.apos-modal .apos-modal-header .apos-modal-title {
+    vertical-align: top;
+    display: inline-block;
+    max-width: 30%;
+    margin-right: 2%;
+    font-weight: 100;
+    font-size: 40px;
+    color: @aposHeaderColor;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.apos-ui .apos-field-label {
+        
+        margin-bottom: 10px;
+       
+       
+       
+        font-weight: 600;
+    }
+
+.apos-ui .apos-field-input-text:focus, .apos-ui .apos-field-input-select:focus, .apos-ui .apos-field-input-textarea:focus {
+    outline: none;
+    
+    box-shadow: 0 0 2px 2px @aposBoxShadowColor
+}
+.apos-ui .apos-field-input {
+    display: block;
+    //padding: 20px;
+    background-color: #EEEEEE;
+    width: 100%;
+    border: 1px solid @aposBorderColor;
+    font-family: @mainFont
+
+    
+    
+}
+
+.apos-ui .apos-job-progress-container .apos-job-progress-indicator {
+  
+    background-color: @aposHeaderColor;
+    background-image: linear-gradient(to right, @mainColor ,@subtitleColor);
+    box-shadow: 2px 2px 24px 1px @aposBoxShadowColor;
+    border: solid 1px @subtitleColor;
+}
+.apos-ui.apos-modal .apos-manage-result-label {
+    padding: 10px 0;
+ 
+    font-size: 18px;
+
+    letter-spacing: 1px;
+    color: @aposHeaderColor;
+}
+.apos-ui .apos-table th a, .apos-ui .apos-table td a:not(:empty)
+{
+    color:@aposmainColor !important;
+    //text-decoration: underline @aposButtonBackgroundColor !important;
+    padding: 4px;
+    border: 1px solid @aposBorderColor;
+    margin-bottom: 4px;
+    text-align: center;
+    background-color: @mainColor;
+    border-radius: 4px;
+}
+.apos-ui .apos-table th a, .apos-ui .apos-table td a:hover:not(:empty){
+    box-shadow: 0 0 2px 2px @aposBoxShadowColor;
+}
+.apos-ui .apos-field-input--small {
+    padding: 7px 20px;
+}
+.apos-ui .apos-table {
+    font-size: 16px;
+    line-height: 24px;
+    background-color: @aposButtonBackgroundColor;
+    
+}
+.apos-modal .apos-modal-content {
+    background-color:@aposButtonBackgroundColor;
+    border: 2px solid @aposBorderColor;
+}
+.apos-modal-body {
+  
+    overflow: auto;
+    background-color:@aposButtonBackgroundColor;
+}
+.apos-ui.apos-modal .apos-modal-footer-inner{
+    background-color:@aposButtonBackgroundColor;
+}
+.apos-ui.apos-modal .apos-modal-breadcrumb {
+    width: 100%;
+    padding: 10px 30px;
+    background-color: @aposButtonBackgroundColor;
+    list-style: none;
+    border-left: 1px solid @aposBorderColor;
+    border-right: 1px solid @aposBorderColor;
+    color:@aposHeaderColor;
+   
+}
+.apos-ui.apos-modal .apos-modal-footer{
+    left:0;
+    border: 3px solid  @aposBorderColor;
+}
+.apos-modal .apos-reorganize-tree-header {
+    padding-top: 20px;
+padding-right: 125px;
+   padding-left: 0;
+    letter-spacing: 1px;
+    text-transform:none;
+    font-size: @mainSize;
+    font-weight: 300;
+    font-family: @mainFont;
+    color:@mainColor;
+}
+.apos-modal .apos-reorganize-tree{
+    background-color: @mainColor;
+}
+.jqtree-title jqtree_common jqtree-title-folder
+{color:@aposButtonBackgroundColor;
+
+}
+.apos-edit,
+.apos-visit{
+    color:@aposmainColor;
+    text-decoration: 1px dotted @aposBoxShadowColor ;
+
+}
+.apos-reorganize-tree .jqtree-tree .apos-reorganize-controls a.apos-delete{
+    color:@errorColor;
+}
+.apos-reorganize-published--true
+{
+    background-color:@aposButtonBackgroundColor;
+}
+.apos-reorganize-tree .jqtree-tree .jqtree-title{
+    color:@aposButtonBackgroundColor;
+}
+.apos-reorganize-tree .jqtree-tree .apos-reorganize-controls a{
+    color:@aposButtonBackgroundColor;
+    text-decoration: dotted 1px @subtitleColor;
+}
+.apos-area-structure-body{
+    background-color: rgb(255 115 1 / 6%)
+}
+.apos-reorganize-tree .jqtree-tree .apos-reorganize-controls:hover{
+color:@subtitleColor;
+}
+.apos-area-structure-body .apos-area-structure-list--widgets
+{
+    border-left: double 3px @aposHeaderColor !important;
+}
+.apos-area-structure-body .apos-area-structure-list--area{
+    border-left: 4px double @aposButtonBackgroundColor !important;
+}
+.apos-area-structure-body ol {
+    background-color: rgb(80 107 170 / 35%) !important;
+    font-size: 16px;
+}
+.apos-ui .apos-button{
+    border: 1px solid @aposBorderColor;
+}
+.apos-ui .apos-button--in-group{
+    border: none;
+    color:@placeholderColor;
+}
+.apos-ui .apos-field-tags .apos-tags .apos-tag-list {
+   background-color: @aposButtonBackgroundColor;
+}
+
+
+
+.apos-ui .apos-field-input-select-wrapper::after {
+    content: "\f0d7";
+    position: absolute;
+    right: 30px;
+    font-family: "FontAwesome";
+    pointer-events: none;
+    color:@aposButtonBackgroundColor;
+}
+.apos-button .apos-button--disabled{
+border: none;
+}
+.apos-button .apos-button--disabled:hover{
+    box-shadow: none;
+    cursor: default;
+    }
+.apos-login-content {
+        background-color:@backgroundColor;
+        position: relative;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .apos-login-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color:@backgroundColor;
+    }
+    .apos-login.apos-ui {
+        margin: 0 auto;
+        max-width: 400px;
+        background-color: #ffffff;
+        padding: 20px;
+    border-radius: 10px;
+    border: 2px solid @aposBorderColor;
+        box-shadow: 0 2px 7px 2px @aposBoxShadowColor;
+    }
+    .apos-login.apos-ui
+    input[type="text"],
+    input[type="password"]
+    {
+        background-color: white;
+        padding: 15px;
+        
+    }
+    .apos-field apos-field-apostrophe-workflow-permissions apos-field-permissions {
+        display: grid;
+        width:100%;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+        grid-template-areas: "head head head head" "check check check check";
+    }
+    .apos-field-label{
+        grid-area: head;
+
+    }
+    .apos-ui .apos-manage-grid-view .apos-manage-grid-piece:hover::before{
+        border: 2px solid @aposBoxShadowColor;
+    }
+    .apos-ui .apos-manage-grid-view .apos-manage-grid-piece .apos-manage-grid-piece-controls .apos-button i,
+    .apos-ui .apos-manage-grid-view .apos-manage-grid-piece .apos-manage-grid-piece-controls .apos-button{
+        color:@aposButtonBackgroundColor;
+    }
+    .apos-workflow-locale-control-label .apos-workflow-locale-control-label--committed,
+    .apos-ui .apos-workflow-locale-label{
+        color:black;
+
+    }
+    .apos-modal-body [data-rich-text] p
+    {
+        background-color:@backgroundColor;
+        color:@mainColor;
+    }
+    .apos-forms-fieldset{
+        background-color:@backgroundColor;
+        color: @mainColor;
+    } 
+
+        /* margin: 0 auto; */
+    /* width: 50%; */
+    /* margin: 10px auto; */
+    /* min-width: 400px; */
+    /* min-height: 100%; */
+    /* background-color: #ffffff; */
+  
+    .apos-manage-tags-view .apos-manage-tags {
+        /* margin: 0 auto; */
+        /* width: 50%; */
+        /* margin: 10px auto; */
+        /* min-width: 400px; */
+        /* min-height: 100%; */
+        background-color: none;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .apos-manage-tags-view .apos-manage-tag {
+        position: relative;
+        margin: 10px;
+        background-color: ivory;
+    }

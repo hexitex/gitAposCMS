@@ -1,0 +1,288 @@
+{% import "macros/widgets.html" as widget %}
+{# {% set xicon = apos
+	.images
+	.first(data.widget.icon, null) %} #}
+{% set backgroundimage = apos
+	.images
+	.first(data.widget.outerImage, null) %}
+{% set posterImage = apos
+	.images
+	.first(data.widget.posterImage, null) %}
+{%set otoggle=''%}
+{%set oFirstPageTransform=''%}
+{%set uid=  apos.sectionWidgets.getUID() %}
+
+{% if data.widget.uOTransition %}
+	{% if not data.widget.firstPage %}
+		{% if data.widget.oCenterVertically %}
+			{% set otoggle=' centerVertically '%}
+		{% endif %}
+		{% if data.widget.oCenterHorizontal %}
+			{% set otoggle=otoggle+' centerHorizontal '%}
+		{% endif %}
+		{% if data.widget.oOffSetString %}
+			{% set otoggle = otoggle + data.widget.oOffSetString %}
+		{% endif %}
+	{% endif %}
+	{% if data.widget.uOTransition %}
+		{% set outClass %}
+		opacity: {{data.widget.oTransitionOpacity}};
+		{# overflow-x:hidden ; #}
+		{{'transform: translate(0,-150%);' if data.widget.oTransition==="slide-top"}}
+		{{'transform: translate(0,150%);' if data.widget.oTransition==='slide-bottom'}}
+		{{'transform: translate(-100%,0);' if data.widget.oTransition==='slide-left'}}
+		{{'transform: translate(100%,0);display:block;' if data.widget.oTransition==='slide-right'}}
+		{{'transform: scale(3,3);display:block;' if data.widget.oTransition==='zoom-out'}}
+		{{'transform: scale(0,0);' if data.widget.oTransition==='zoom-in'}}
+		{{'transform: scale(3,0);display:block;' if data.widget.oTransition==='snap-in'}}
+		{{'transform: scale(0,3);display:block;' if data.widget.oTransition==='snap-out'}}
+		{{'transform: scale(-1,1);' if data.widget.oTransition==='flip-horz'}}
+		{{'transform: scale(1,-1);' if data.widget.oTransition==='flip-vert'}}
+		{{'transform: scale(-1,-1);' if data.widget.oTransition==='flip-both'}}
+		{{'transform: rotate(-45deg);' if data.widget.oTransition==='minus-rotate'}}
+		{{'transform: rotate(45deg);'	if data.widget.oTransition==='plus-rotate'}}
+		{{'clip-path: polygon(50% 0%, 50% 50%, 98% 35%, 50% 50%, 79% 91%, 50% 50%, 21% 91%, 50% 50%, 2% 35%, 50% 50%);' if data.widget.oTransition==='clip-star'}}
+		{{'clip-path: circle(0.0% at 50% 50%);' if data.widget.oTransition==='clip-circle' }}
+		-webkit-filter:blur({{data.widget.oTransitionBlur}}px) contrast({{data.widget.oTransitionContrast}}%) saturate({{data.widget.oTransitionSaturation}}%) brightness({{data.widget.oTransitionBrightness}}%);
+		filter:blur({{data.widget.oTransitionBlur}}px) contrast({{data.widget.oTransitionContrast}}%) saturate({{data.widget.oTransitionSaturation}}%) brightness({{data.widget.oTransitionBrightness}}%);
+		{% endset %}
+		{% set inClass %}
+		opacity: {{data.widget.outerOpacity}};
+		{# overflow-x:auto ; #}
+		{# transform: translate(0);
+		transform: scale(1);
+		transform: rotate(0); #}
+		{{ 'clip-path: polygon(50% 0%, 78% 0, 100% 0, 100% 29%, 100% 100%, 75% 100%, 0 100%, 0 65%, 0 39%, 0 0);' if data.widget.oTransition==='clip-star'}}
+		{{ 'clip-path: circle(100% at 50% 50%);' if data.widget.oTransition==='clip-circle' }}
+		{# {{'-webkit-filter: blur(0px) contrast(100%) brightness(100%) saturate(100%);' if data.widget.firstPage}}
+		{{'-webkit-filter: blur(0px) contrast(100%) brightness(100%) saturate(100%);' if data.widget.firstPage}} #}
+		{% endset %}
+	{% endif %}
+	{% if not data.widget.firstPage %}
+		{% set otoggle=otoggle+' toggle(o-in'+uid+',o-out'+uid+')' %}
+	{% endif %}
+{% endif %}
+
+<style>
+	{% if data.widget.firstPage and data.widget.uOTransition %}
+		@keyframes a{{uid | replace("-", "")}}{
+			0% {
+				{{outClass}}
+			}
+			100% {
+				{{inClass}}
+			}
+		}
+	{% endif %}
+
+	{% if data.widget.uOTransition and not data.widget.firstPage %}
+		.o-in{{uid}}{
+			{{inClass}}
+			{{'transition-delay:'+data.widget.oTransitionDelay+'ms;'}}
+			{{'transition-duration:'+data.widget.oTransitionSpeed+'ms;'}}
+			{{'transition-timing-function: ease-out;'}}
+		
+		}
+		 .o-out{{uid}}{
+				{{outClass}}
+				{{'transition-delay:'+data.widget.oTransitionDelay+'ms;'}}
+				{{'transition-duration:'+data.widget.oTransitionSpeed+'ms;'}}
+				{{'transition-timing-function: ease-in;'}}
+			}
+
+		{% endif %}
+		.bigSection{{uid}}
+				{
+					{% if data.widget.uOTransition and data.widget.firstPage %}
+
+						animation-duration: {{data.widget.oTransitionSpeed}}ms;
+						animation-timing-function: ease-in;
+						animation-delay: {{data.widget.oTransitionDelay}}ms;
+						animation-iteration-count: 1;
+						animation-fill-mode: forwards;
+						animation-name: a{{uid | replace("-", "")}};
+
+					{% endif %}
+
+					height: {{data.widget.backgroundHeight}};
+
+					{% if data.widget.outerColor %}
+						background-color: {{apos.sectionWidgets.convertHex(data.widget.outerColor,data.widget.outerColorOpacity)}};
+					{% endif %}
+
+					{% if backgroundimage %}
+
+						{% if apos.attachments.hasFocalPoint(backgroundimage) %}
+							background-position: {{apos.attachments.focalPointToBackgroundPosition(backgroundimage)}};
+						{% else %}
+							background-position: center;
+						{% endif %}
+
+						{% if data.widget.coverOrContain==='contain'%}	
+							background-size:contain;
+							background-repeat:no-repeat;
+						{% else %}
+							background-size: cover;
+							transition: height 0.5s;
+						{% endif %}
+
+						{% set backgroundURL=apos.attachments.url(backgroundimage,{size: data.widget.outerSize }) %}
+						background-image: url("{{ backgroundURL }}");
+
+						{{'background-repeat: no-repeat; background-attachment: fixed;' if data.widget.staticBackground}}
+					{% endif %}
+
+					{% if (data.widget.filter==="true" and not data.user) or data.widget.filter==="Always"%}
+						{% if data.widget.backdrop===true %}
+							backdrop-filter:{% else %}
+							filter:{% endif %}
+						opacity({{data.widget.outerOpacity}}) blur({{data.widget.blur}}px) brightness({{data.widget.brightness}}) hue-rotate({{data.widget.hue}}deg) contrast({{data.widget.contrast}}) grayscale({{data.widget.grayscale}}) invert({{data.widget.invert}}) saturate({{data.widget.saturate}}) sepia({{data.widget.sepia}});
+
+					{% endif %}
+
+					{% if data.widget.backgroundWidth %}
+						width: {{data.widget.backgroundWidth}};
+					{% endif %}
+					{% if data.widget.overrideMargins %}
+						margin-left: {{data.widget.marginLeft}};
+						margin-right: {{data.widget.marginRight}};
+						margin-top: {{data.widget.marginTop}};
+						margin-bottom: {{data.widget.marginBottom}};
+					{% endif %}
+
+					{% if data.widget.overridePadding %}
+						padding-left: {{data.widget.paddingLeft}};
+						padding-right: {{data.widget.paddingRight}};
+						padding-top: {{data.widget.paddingTop}};
+						padding-bottom: {{data.widget.paddingBottom}};
+					{% endif %}
+
+					{% if data.widget.zindex >1 %}
+						z-index: {{data.widget.zindex}};
+					{% endif %}
+				}
+				 .positions{{uid}}
+				{
+
+					{% if data.widget.position== 'fixed' %}
+						position: fixed;
+						left: {{data.widget.xPos}};
+						top: {{data.widget.yPos}};
+					{% endif %}
+					{% if data.widget.position== 'absolute' %}
+						position: absolute;
+						left: {{data.widget.xPos}};
+						top: {{data.widget.yPos}};
+					{% endif %}
+					{% if data.widget.position== 'sticky' %}
+						position: sticky;
+						position: -webkit-sticky;
+						top: {{data.widget.yPos}};
+					{% endif %}
+				}
+</style>
+
+<div class="positions{{uid}}" style="display:inline-block;min-height:100%!important;width:100%">
+	<a name="{{data.widget.navName | css}}" class="sscroll" id='{{data.widget.navName | css}}'></a>
+	<bigSection 
+{% if data.widget.outerParallax %}
+	data-rellax-speed="{{data.widget.outerParallaxSpeed}}" 
+	data-rellax-zindex="{{data.widget.outerParallaxZIndex}}" 
+	data-rellax-percentage="{{data.widget.outerParallaxPercentage}}" 
+{%endif%}
+{%set oborder=''%}
+
+
+{%if data.widget.oShadowBox == 'shadow-box-sq-' %}
+{% set oborder=data.widget.oShadowBox+data.widget.oShadow %}
+	{%if data.widget.oRadius and data.widget.oTop%}
+	{% set oborder=oborder+' '+data.widget.oRadius+'-top' %}
+	{%endif%}
+	{%if data.widget.oRadius and data.widget.oBottom%}
+	{% set oborder=oborder+' '+data.widget.oRadius+'-bottom' %}
+	{%endif%}
+	{%if data.widget.oBorder %}
+	{% set oborder=oborder+' '+data.widget.oBorder %}
+	{%endif%}
+	
+	{%if data.widget.oBorderSize and data.widget.oTop %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-top' %}
+	{%endif%}
+	{%if data.widget.oBorderSize and data.widget.oBottom %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-bottom' %}
+	{%endif%}
+	{%if data.widget.oBorderSize and data.widget.oLeft %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-left' %}
+	{%endif%}
+	{%if data.widget.oBorderSize and data.widget.oRight %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-right' %}
+	{%endif%}
+{%endif%}
+
+{%if data.widget.oShadowBox=='rad' %}
+
+	{%if data.widget.oRadius and data.widget.oTop%}
+	{% set oborder=oborder+' '+data.widget.oRadius+'-top' %}
+	{%endif%}
+	{%if data.widget.oRadius and data.widget.oBottom%}
+	{% set oborder=oborder+' '+data.widget.oRadius+'-bottom' %}
+	{%endif%}
+
+{%endif%}
+
+{%if data.widget.oShadowBox=='borderOnly' %}
+
+	{%if data.widget.oRadius and data.widget.oTop%}
+	{% set oborder=oborder+' '+data.widget.oRadius+'-top' %}
+	{%endif%}
+	{%if data.widget.oRadius and data.widget.oBottom%}
+	{% set oborder=oborder+' '+data.widget.oRadius+'-bottom' %}
+	{%endif%}
+
+	{%if data.widget.oBorder  %}
+	{% set oborder=oborder+' '+data.widget.oBorder %}
+	{%endif%}
+	
+	{%if data.widget.oBorderSize and data.widget.oTop %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-top' %}
+	{%endif%}
+	{%if data.widget.oBorderSize and data.widget.oBottom %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-bottom' %}
+	{%endif%}
+	{%if data.widget.oBorderSize and data.widget.oLeft %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-left' %}
+	{%endif%}
+	{%if data.widget.oBorderSize and data.widget.oRight %}
+	{% set oborder=oborder+' '+data.widget.oBorderSize+'-right' %}
+	{%endif%}
+{%endif%}
+
+{% if data.widget.oOnce and not data.widget.firstPage %}
+data-scroll="once {{otoggle}}"
+{% else %}
+data-scroll="{{otoggle}}"
+{%endif%}
+
+id="{{uid}}bs" 
+class="bigSection{{uid}}
+{{oborder}}{{' rellax ' if data.widget.outerParallax }}
+{{' transitions ' if data.widget.uOTransition and not data.widget.firstPage}} {{'fixedback' if data.widget.staticBackground and not data.widget.backgroundVideo }}"
+
+>
+
+		{% if data.widget.backgroundVideo %}
+			{%set posterURL=apos.attachments.url(posterImage,{size: data.widget.posterSize }) %}
+			<video class="video-back" {% if data.widget.posterImage %}poster='{{posterURL}}'{%endif%} playsinline autobuffer autoplay {% if data.widget.loop %}loop{%endif%} {% if data.widget.mute %}muted{%endif%} id="{{uid}}-vid" >
+				<source src="{{data.widget.outerVideo}}" type="video/mp4">
+				Your browser does not support background videos!
+		</video>
+		{% endif %}
+
+		<section id="{{data.widget.navName | css}}-{{uid}}" >
+
+			{{ widget.postWidget(data.widget , 'nsection') }}
+
+		</section>
+	</bigSection>
+</div>
+<script></script>

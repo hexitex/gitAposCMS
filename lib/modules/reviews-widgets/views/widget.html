@@ -1,0 +1,30 @@
+{# in lib/modules/contact-form-widgets/views/widget.html #}
+{% import "apostrophe-schemas:macros.html" as schemas %}
+
+<form class="review-widget" id="{{ data.piece._id }}" data-slug="{{ data.piece.slug }}" data-title="{{ data.piece.title }}" data-review-form>
+  <h4 class="leave-review">Leave a Review!!!!</h4>
+
+  <input type="hidden" name="productId" value="data.piece._id"/>
+  <input type="hidden" name="date" value=""/>
+  <input type="hidden" name="title" value=""/>
+   <div style="width: 100%; margin: 50px;">
+    <lable for="ratings">Your Rating! </label>&nbsp;{{ apos.reviewForm.stars('',5)|safe }}
+  </div><br/>
+  {# <div> #}
+    {% for piece in data.reviews %}
+      {% if piece.name == 'readerName' or piece.name == 'reviews' %}
+        {{ schemas.stringBody(piece) }}
+      {% endif %}
+    {% endfor %}
+
+    <input type="hidden" name="_id" value="{{ data.widget._id }}"/>
+    <input type="hidden" id="rating" name="ratings" value=""/>
+   
+    <button type="submit" class="submitContact">Submit</button>
+  {# </div> #}
+  {# Later gets hoisted out and becomes visible #}
+  <div class="thank-you" data-thank-you>
+    <h4>Thanks!</h4>
+  </div>
+
+</form>

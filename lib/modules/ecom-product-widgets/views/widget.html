@@ -1,0 +1,23 @@
+    <div class="blog-widget-container">
+        <!-- Slides -->
+        {% if data.widget._pieces %}
+                   
+            {% for d in data.widget._pieces %}
+                {% set image = apos.images.first(d.image) %}
+                <div class="blog-widget-frame" >
+                <a href="{{ d._url }}" data-namespace="blogWidget" class="directory">
+                    <div class="blog-widget-item" style="{% if image %} background-image:url(..{{ apos.attachments.url(image , {size : 'full'}) }}); {% if apos.attachments.hasFocalPoint(image) %}background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};{% endif %}{% endif %}">
+                    </div>
+                     
+                    <div class="content-blog-area" data-piece-id="{{ d._id }}">
+                        
+                        <h3 class="white-text font-outline">{{ d.title | truncate(150, true, "...") }}</h3>
+                        <p class="white-text font-outline">{{ apos.areas.plaintext(d.description , { limit : 100 , ellipsis : ' ...' }) }}</p>
+                    </div>
+                </a>
+                </div>
+                                 
+            {% endfor %}
+        {% endif %}
+    </div>
+      

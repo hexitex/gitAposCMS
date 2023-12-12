@@ -1,0 +1,297 @@
+{% macro postWidget(data, area) %}
+
+{# {% if data.page %}
+{% set data=data.page %}
+{% endif %} #}
+
+
+    {%if data._edit and data.options.edit != false %}
+
+    {{ apos.area(data, area,{widgets:{'apostrophe-rich-text': {
+             toolbar: ['bold', 'italic', 'Link', 'Unlink', 'Anchor', 'Table', 'BulletedList', 'Strike', 'Subscript', 'Superscript', 'font'],
+                    styles: [
+                        {   name: 'Default',
+                            element: 'p',
+                            attributes:{'class': 'normal-text'}
+                        },
+                        {   name: 'Highlight Paragraph',
+                            element: 'p',
+                            attributes: {'class': 'highlight'}
+                        },                   
+                        {   name: 'H1',
+                            element: 'h1'
+                        },
+                        {   name: 'H2',
+                            element: 'h2'
+                        },
+                        {   name: 'H3',
+                            element: 'h3'
+                        },
+                        {   name: 'H4',
+                            element: 'h4'
+                        },
+                        {   name: 'H5',
+                            element: 'h5'
+                        },
+                        {   name: 'H6',
+                            element: 'h6'
+                        },
+                     
+                        {   name: 'Section Heading',
+                            element: 'span',
+                            attributes: {'class': 'section-headings'}
+                        },
+                        {   name: 'Sub-Heading',
+                            element: 'span',
+                            attributes: {'class': 'subheading'}
+                        },
+                        {   name: 'Hero Title',
+                            element: 'span',
+                            attributes: {'class': 'hero__title'}
+                        },
+                        {   name: 'Big Hero Title',
+                            element: 'span',
+                            attributes: {'class': 'hero__title--1'}
+                        },
+                        {   name: 'Hero Sub-Title',
+                            element: 'span',
+                            attributes: {'class': 'hero__subtitle'}
+                        },
+                        {   name: 'Hero Subtitle CAPS',
+                            element: 'span',
+                            attributes: {'class': 'hero__subtitle--1'}
+                        },
+                        {   name: 'Base Color',
+                            element: 'span',
+                            attributes: {'class': 'normal-text'}
+                        },
+                           {   name: 'Invert Colour',
+                            element: 'span',
+                            attributes: {'class': 'invert-text'}
+                        },
+                      
+                          {   name: 'Add Hightlight Colour',
+                            element: 'span',
+                            attributes: {'class': 'orange-text'}
+                        },
+                       {   name: 'Add Black',
+                            element: 'span',
+                            attributes: {'class': 'black-text'}
+                        },
+                         
+                         {   name: 'Add Red',
+                            element: 'span',
+                            attributes: {'class': 'red-text'}
+                        },
+                        {   name: 'Add Grey',
+                            element: 'span',
+                            attributes: {'class': 'grey-text'}
+                        },
+                      
+                        {   name: 'Highlighter',
+                            element: 'span',
+                            attributes: {'class': 'highlight'}
+                        },
+                        {   name: 'Outline',
+                            element: 'span',
+                            attributes: {'class': 'font-outline'}
+                        },
+                        {   name: 'Multi Shadows',
+                            element: 'span',
+                            attributes: {'class': 'font-shadow-multiple'}
+                        },
+                        {   name: '3D Float',
+                            element: 'span',
+                            attributes: {'class': 'font-3d-float'}
+                        },
+                        {   name: '3D',
+                            element: 'span',
+                            attributes: {'class': 'font-3d'}
+                        }
+                      
+                    ],
+                    
+                       controls: {
+                        movable: true,
+                        removable: true,
+                        position: 'top-right'
+                    }
+                },
+             'templateSections' : {
+                  editLabel : 'Edit Section Template',
+                  limit: 1,
+                   blockLevelControls: true,
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+            'apostrophe-html':{
+              editLabel : 'Edit RAW HTML',
+                  blockLevelControls: true,
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+             'section' : {
+                editLabel : 'Edit Smart Section',
+                blockLevelControls: true,
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+           
+               'diagramEditor' : {
+                editLabel : 'Edit Diagram',
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+             'one-columns' : {
+                
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+            'two-columns' : {
+               blockLevelControls: true,
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+            'three-columns' : {
+              
+                controls : {
+                    movable : true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+            'apostrophe-images': {
+    
+                size: 'full'
+            },
+            'spacer': {
+             
+                controls: {
+                    movable: true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+              'apostrophe-link': {
+                controls: {
+                  cloneable: true,
+                  removable: true,
+                  position: 'top-right'
+                }
+              },
+             'iframe': {
+                controls: {
+                    movable: true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+     
+            'apostrophe-forms': {
+                 controls: {
+                    movable: true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+   
+                    
+            'squarebox-gallery': {
+                controls: {
+                    movable: true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+          
+            'album-gallery': {
+                controls: {
+                    movable: true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+            'videos': {
+                controls: {
+                    movable: true,
+                    removable: true,
+                    position: 'top-right'
+                }
+            },
+             
+            'apostrophe-blog' : {
+             
+                editLabel : 'Edit Number of Items',
+                controls : {
+                movable : true,
+                position : 'top-right'
+                }
+            },
+              'apostrophe-twitter' : {
+             
+                editLabel : 'Edit Number of Items and Source of Tweets',
+                controls : {
+                movable : true,
+                position : 'top-right'
+                }
+            },
+     
+            'contact-section' : {
+             
+                editLabel : 'Edit Contact Title ?',
+                controls : {
+                movable : true,
+                position : 'top-right'
+                }
+            },
+               'member-section' : {
+             
+                editLabel : 'Edit Member Signup ?',
+                controls : {
+                movable : true,
+                position : 'top-right'
+                }
+            },
+         
+    
+            'email-signup-section' : {
+              
+                editLabel : 'Edit Email Signup Title ?',
+                controls : {
+                movable : true,
+                position : 'top-right'
+                }
+            }
+     },
+      widgetGroups: {
+    'Content': [ 'apostrophe-rich-text', 'templateSections','apostrophe-images','videos','album-gallery','squarebox-gallery' ],
+    'Layout': [ 'one-columns', 'two-columns','three-columns','spacer','section' ],
+    'Forms': ['email-signup-section','contact-section', 'apostrophe-forms','member-section'],
+    'Widgets': ['apostrophe-blog','apostrophe-link','iframe','diagramEditor','apostrophe-twitter','apostrophe-html']
+  }
+    }
+   
+    
+    ) }}
+        {%else%}
+        {{ apos.area(data, area)}}
+    {% endif %}
+{% endmacro %}

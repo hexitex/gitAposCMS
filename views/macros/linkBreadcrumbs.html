@@ -1,0 +1,23 @@
+{% macro breadcrumbs(page, piece) %}
+    {# (page = data.page) (piece = data.piece) #}
+    <div class="breadcrumbs-position">
+        {% for ancestor in page._ancestors %}
+            {# To access ancestor of current page #}
+
+            <a href="{{ ancestor._url }}">
+                {{ ancestor.title }}</a> <i class="fa fa-caret-right"></i>
+       
+    {% endfor %}
+        {# <a href="{{ page._url }}">
+            {{ page.title }}</a> #}
+        {% if piece %}
+            <a href="{{ page._url }}">
+                {{ page.title }}</a>
+            <i class="fa fa-caret-right"></i> {{ piece.title | capitalize }}
+        {% else %}
+            {# <a href="{{ page._url }}"> #}
+                {{ page.title }}
+                {# </a> #}
+        {% endif %}
+    </div>
+{% endmacro %}

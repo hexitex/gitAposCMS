@@ -1,0 +1,29 @@
+{#
+  This is an example home page template. It inherits and extends a layout template
+  that lives in the top-level views/ folder for convenience
+#}
+{# {% import "macros/linkBreadcrumbs.html" as link %} #}
+{% extends "layout.html" %}
+{% import "macros/widgets.html" as widget %}
+{# {% import "macros/navigation.html" as nav %} #}
+{% block extraHead %}
+  {% include "apostrophe-seo:view.html" %}
+  {{ super() }}
+{% endblock %}
+
+{% block main %}
+  <main id="barba-wrapper" >
+    <div class="barba-container" data-namespace="main{{ data.page._id}}">
+      <div style="height:40px"></div>
+            {# {{ link.breadcrumbs(data.page) }} #}
+ 
+       <section class="main-content" id="mainSectionx">
+    
+        <div class="blocky">
+          {{ widget.postWidget(data.page,'widgets') }}
+        </div>
+      </section>
+    </div>
+  </main>
+
+{% endblock %}

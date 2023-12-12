@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{# {% import "macros/linkBreadcrumbs.html" as link %} #}
+{% import "macros/widgets.html" as widget with context %}
+{% import "macros/previousNextProduct.html" as next %}
+{# {% import "macros/navigation.html" as nav %} #}
+{# % import "macros/postScroll.html" as info % #}
+{# {% import "ec-columns:macros/utils.html" as utils with context %} #}
+{# Macros (Look on top level view folder) #}
+{# Excess using data.piece only #}
+{% block title %}{{ data.piece.title }}
+{% endblock %}
+{% block extraHead %}
+    {# OPEN GRAPH #}
+    {% include "apostrophe-open-graph:view.html" %}
+    {{ super() }}
+{% endblock %}
+
+{# {% block beforeMain %} #}
+    {# <style> #}
+        {# html { #}
+            {# visibility: hidden; #}
+        {# } #}
+    {# </style> #}
+    {# <header> #}
+        {# {{ super() }} #}
+        {# <aside>
+      {{ nav.nav(data,'product-show') }}
+    </aside> #}
+
+    {# </header> #}
+{# {% endblock %} #}
+
+{% block main %}
+    <main id="barba-wrapper">
+        <div class="barba-container" data-namespace="main-prod">
+            <section class="body-content">
+                <div class="show-content-area">
+
+                    {# {% if data.piece %}
+                        {{ link.breadcrumbs(data.page , data.piece) }}
+                    {% endif %} #}
+                       {% set image = apos
+            .images
+            .first(data.piece.photo) %}
+                    {#% set textCount = data.piece.title %#}
+                    <div class="main-blog-area">
+                        <h3 >{{ data.piece.title }} - {{ data.piece.memberNumber }}</h3>
+                        <div class="line"></div>
+
+                        <div class="two-container-column" style="margin:0 auto; padding:0; height:auto;">
+
+                            <div class="two-column-one" style="padding-bottom:40px;padding-right:40px;padding-left:40px;">
+                                {# <div class="doc-pic"> #}
+                                <div class="doc-pic"><img src="..{{ apos.attachments.url(image, {size : '350'}) }}"/></div>
+
+                                    {# {{ apos.singleton(data.piece, 'photo', 'apostrophe-images', { size : 'one-third', edit : false }) }} #}
+                                {# </div> #}
+                                <div class="tags-show-area">
+                                    {% for tags in data.piece.tags %}
+                                        <div class="tag-item ">#{{ tags | capitalize }}</div>
+                                    {% endfor %}
+                                    <br/>
+                                    {# <a href="../lookup/{{data.piece.slug}}" target="cards">Generate Membership Card</a> #}
+                                </div>
+                            </div>
+
+                            <div class="two-column-two" style="padding-bottom:40px;padding-right:40px;padding-left:40px;height:auto">
+                                <span>
+                               Email: 
+                <a target="email" href="mailto:{{data.piece.emailAddress}}?bcc=weekend.wanderer@btinternet.com&subject=Weekend Wanderers Membership&body=Dear {{data.piece.title}},">{{data.piece.emailAddress}}</a>
+                                </span>
+                                 <div class="line"></div>
+                                <span>
+                                    <b>Date Joined: </b>{{data.piece.joinDate |date("Do MMM YYYY") }}
+                                </span>
+                                <div class="line"></div>
+                                 {# <span>
+                                    <b>Scanned Dates: </b>
+                                
+                                       {% for dts in data.piece.lastScanned %}
+                                       <br/><span>{{dts.scannedDate |date("Do MMM YYYY") }}</span>
+                                       {% endfor %}
+                                </span>
+                                <div class="line"></div> #}
+                            
+                           
+                                    <h4>Address x</h4>
+                                    <pre>{{ data.piece.address}}</pre>
+                                    <h4>
+
+                                        <span>{{ data.piece.postcode }}</span><br/><br/>
+                                        <span>Telephone: {{data.piece.mobile}}</span>
+                                        <br/>
+                                                                         
+                                    </div>
+                                </div>
+
+                                <section class="end-section" id="esid" style="{{ "display:none;" if not data.previous and not data.next }}">
+                                    <div class="title-center">
+                                        <div class="underline"></div>
+
+                                        {# {% if data.next and data.previous %}
+                                            <h1 class="title-read">Previous / Next Member</h1>
+                                        {% elif data.next or data.previous %}
+                                            <h1 class="title-read">Another Member</h1>
+                                        {% endif %} #}
+
+                                    </div>
+
+                                    {{ next.link(data) }}
+                                  
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+    {% endblock %}

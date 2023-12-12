@@ -1,0 +1,105 @@
+{% set widget = data.widget %}
+{% set backgroundimage = apos
+  .images
+  .first(data.widget.linkImage, null) %}
+{% if widget.linkType == 'page' %}
+  {% set path = widget._linkPage._url %}
+{% elif widget.linkType == 'file' %}
+  {% set path = widget._linkFile._url %}
+{% elif widget.linkType == 'blog' %}
+  {% set path = widget._article._url %}
+{% elif widget.linkType == 'custom' %}
+  {% set path = widget.linkUrl %}
+{% endif %}
+
+{% if widget.useImage == 'image' and backgroundimage %}
+  {% set classx = 'imageLink' %}
+{% endif %}
+
+{% if widget.useImage == 'button' and backgroundimage %}
+  {% set classx = 'buttonWithImage' %}
+{% endif %}
+
+{% if widget.useImage == 'button' and not backgroundimage %}
+  {% set classx = 'buttonWithImage' %}
+{% endif %}
+
+{# <ilink> #}
+
+<a href="{{ path }}"
+    {% if widget.linkTarget %} 
+      target="_blank" rel="noopener" 
+    {% endif %}
+    {% if widget.linkTitle %} 
+      title="{{widget.linkTitle}}" 
+    {% endif %}>
+
+  {% if classx == 'imageLink' and backgroundimage %}
+    <div class="imageLink" style="
+  {% if apos.attachments.hasFocalPoint(backgroundimage) %}
+    background-position: {{ apos.attachments.focalPointToBackgroundPosition(backgroundimage) }};
+	{% else %}
+    background-position: center;
+	{% endif %}
+		
+	{% if widget.coverOrContain==='contain' %}	
+	 background-size:contain;background-repeat:no-repeat;
+	{% else %}
+	 background-size:cover;
+	{% endif %}
+		
+	{% set backgroundURL=apos.attachments.url(backgroundimage,{size: widget.imageSize }) %}
+	background-image:url('{{ backgroundURL }}'); 
+		
+	background-repeat: no-repeat;
+  min-width:{{widget.displayedWidth}};
+  min-height:{{widget.displayedHeight}};
+	text-align:{{widget.textAlign}}
+  ">{{widget.linkText}}
+      {% if widget.linkDescription %}
+        <br/>
+        {{	widget.linkDescription}}
+      {% endif %}
+    </div>
+  {% elif classx == 'buttonWithImage' %}
+    <div class="iconButton">
+      <div class="buttonWithImage" style="
+      {% if backgroundimage %}
+  {% if apos.attachments.hasFocalPoint(backgroundimage) %}
+    background-position: {{ apos.attachments.focalPointToBackgroundPosition(backgroundimage) }};
+	{% else %}
+    background-position: center;
+	{% endif %}
+		
+	{% if widget.coverOrContain==='contain' %}	
+	 background-size:contain;background-repeat:no-repeat;
+	{% else %}
+	 background-size:cover;
+	{% endif %}
+		
+	{% set backgroundURL=apos.attachments.url(backgroundimage,{size: widget.imageSize }) %}
+  
+	background-image:url('{{ backgroundURL }}'); 
+	
+  background-repeat: no-repeat; 
+  min-width:{{widget.displayedWidth}};
+  min-height:{{widget.displayedHeight}};
+  {% endif %}
+	
+  "></div>
+      <div class="buttonWithImage-text" style="text-align:{{widget.textAlign}}">{{widget.linkText}}
+        {% if widget.linkDescription %}
+          <div class="linkDescription">
+            {{	widget.linkDescription}}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+  {% else %}
+    <div class="{{ classx}}">
+      {{ widget.linkText }}
+    </div>
+  {% endif %}
+
+</a>

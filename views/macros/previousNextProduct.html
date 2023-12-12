@@ -1,0 +1,60 @@
+{# {% import "macros/likeIcon.html" as icon with context %} #}
+{% macro link(data) %}
+
+{% if data.previous or data.next %}
+
+    <div class="previous-next-container">
+            <div class="previous" style="{{ "display:none;" if not data.previous }}{{ "flex : 1 100%;" if not data.next }}">
+                {% if data.previous %}
+              
+                    
+                        {% set previous = data.previous %}
+                        {% set image = apos.images.first(previous.image) %}
+                        <a href="{{ previous._url }}" class="directory">
+                        <div class="blog-content-previousNext">
+                            <div class="thumbnail-blog-area-index">
+                                {% if image %}
+                                    <img class="thumbnail-blog-previousNext" style="{%- if apos.attachments.hasFocalPoint(image) -%}background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};{%- endif -%}background-image: url({{ apos.attachments.url(image , {size : 'full'}) }});">                
+                               {% else %}
+                              
+                               
+                                {% endif %}
+                            </div>
+                            <div class="content-blog-area-prev-next" data-piece-id="{{ previous._id }}">
+                                <h2 class="blog-title white-text font-outline">{{ previous.title | truncate(40, true, "...") }}</h2>
+                                <p class=" blog-description white-text font-outline">{{ apos.areas.plaintext(previous.description , { limit : 150 , ellipsis : '...' }) }}</p>
+                            </div>
+                        </div>
+                        </a>
+                        
+                {% endif %}
+            </div>
+            {% if data.previous %}
+                <div class="vertical-space" style="{{ "display:none;" if not data.next }}"></div>
+            {% endif %}
+            <div class="next" style="{{ "display:none;" if not data.next }}{{ "flex : 1 100%;" if not data.previous }}">
+                {% if data.next %}
+                {% set next = data.next %}
+                {% set image = apos.images.first(next.image) %}
+                    <a href="{{ next._url }}" class="directory">
+                    <div class="blog-content-previousNext">
+                        
+                        <div class="thumbnail-blog-area">
+                        {% if image %}
+                            
+                            <img class="thumbnail-blog-previousNext" style="{%- if apos.attachments.hasFocalPoint(image) -%}background-position: {{ apos.attachments.focalPointToBackgroundPosition(image) }};{%- endif -%}background-image: url({{ apos.attachments.url(image , {size : 'full'}) }});">                
+                         {% else %}
+                             
+                        {% endif %}
+                        </div>
+                        <div class="content-blog-area-prev-next" data-piece-id="{{ next._id }}">
+                            <h2 class="blog-title white-text font-outline">{{ next.title | truncate(40, true, "...") }}</h2>
+                            <p class="blog-description white-text font-outline">{{ apos.areas.plaintext(next.description , { limit : 150 , ellipsis : ' ...' }) }}</p>
+                        </div>
+                    </div>
+                    </a>
+                {% endif %}                
+            </div>
+    </div>
+{% endif %}
+{% endmacro %}

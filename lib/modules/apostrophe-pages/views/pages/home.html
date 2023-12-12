@@ -1,0 +1,41 @@
+{#
+This is an example home page template. It inherits and extends a layout template
+that lives in the top-level views/ folder for convenience
+#}
+
+{% extends "layout.html" %}
+{% import "macros/widgets.html" as widget %}
+{# {% import "macros/navigation.html" as nav %} #}
+{% block extraHead %}
+{% include "apostrophe-seo:view.html" %}
+{{ super() }}
+{% endblock %}
+
+
+{% block main %}
+{% if data.piece._edit or data.page._edit %}
+    {# // Other special stuff that only editors should see #}
+  {% else %}
+    <style>
+    .apos-ui .apos-context-menu-container {
+      display: none !important;
+    }
+    </style>
+  {% endif %}
+<main id="barba-wrapper">
+
+  <div class="barba-container" data-namespace="main{{data.page._id}}">
+ <div style="height:40px"></div>
+ <section class="main-content" id="mainSection">
+
+    <div class="blocky">
+      {{ widget.postWidget(data.page,'widgets') }}
+    </div>
+ </section>
+
+ 
+  </div>
+</main>
+{% endblock %}
+
+  

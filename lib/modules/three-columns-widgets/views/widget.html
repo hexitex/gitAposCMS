@@ -1,0 +1,12 @@
+{% import "macros/widgets.html" as widget %}
+<div class="three-container-column{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %}">
+    <div class="three-column-one{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %}" style="{% if data.widget.marginBetween %}margin-right :{{ data.widget.marginBetween }}px;{% endif %}">
+        {{ widget.postWidget(data.widget , 'columnOne') }}
+    </div>
+    <div class="three-column-two{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %}" style="{% if data.widget.marginBetween %}margin-right :{{ data.widget.marginBetween }}px;{% endif %}">
+        {{ widget.postWidget(data.widget , 'columnTwo') }}
+    </div>
+    <div class="three-column-three{% if data.widget.stack %}{{ data.widget.stack }}{% else %}900{% endif %}">
+        {{ widget.postWidget(data.widget , 'columnThree') }}
+    </div>
+</div>

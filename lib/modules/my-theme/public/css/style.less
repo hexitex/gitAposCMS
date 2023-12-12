@@ -1,0 +1,694 @@
+@import "colors.less";
+@import "prefixer.less";
+
+#myVideo {
+  position       : absolute;
+  top            : 0px;
+  left           : 0px;
+  min-width      : 100%;
+  min-height     : 100%;
+  background-size: cover;
+  z-index        : -2;
+}
+
+@fullWidth  : 100%;
+@fullHeight : 100%;
+
+ol,
+ul {
+  padding-top : 50px;
+  padding-left: 20px;
+
+}
+
+li {
+
+  line-height   : 130%;
+  padding-bottom: 20px;
+}
+
+#children {
+  overflow: hidden;
+}
+
+.imageLink {
+  padding: 10px;
+}
+
+.buttonWithImage {
+  background-position: center;
+  background-size    : contain;
+  background-repeat  : no-repeat;
+
+  background-repeat: no-repeat;
+  min-width        : 32px;
+  min-height       : 32px;
+
+}
+
+.buttonWithImage-text {
+
+  padding    : 10px;
+  line-height: 22px;
+}
+
+.iconButton {
+  display         : flex;
+  flex-direction  : row;
+  align-content   : center;
+  justify-content : flex-start;
+  align-items     : center;
+  padding         : 10px;
+  border-radius   : 10px;
+  border          : 1px solid @fourthColor;
+  background-color: @buttonBackgroundColor;
+
+}
+.breadcrumbs-position{
+  position: absolute;
+  font-size: smaller;
+  left: 5%;
+  top: 45px;
+  z-index: 2;
+
+}
+.linkDescription {
+  font-size : smaller;
+  font-style: italic;
+  // color     : @mainColor;
+}
+
+.hide {
+  display: none;
+}
+
+.section {
+  width : 80%;
+  margin: 0 auto;
+}
+
+.svg-icon {
+  top   : 0;
+  cursor: pointer;
+  left  : 0;
+  right : 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.center {
+  left: 48%;
+}
+
+.here-tab {
+  font-weight: 400;
+}
+
+.child-tab {
+  font-weight: 800;
+}
+
+.list-tabs {
+  .flex-block();
+  .flex(1);
+  .flex-direction(column);
+  .justify-content(center);
+  text-decoration: none;
+  color          : @secondColor;
+  height         : 100%;
+  font-family    : @mainFont;
+
+  &:hover {
+    background-color: @mainColor;
+    color           : @backgroundColor;
+  }
+}
+
+.main {
+  overflow: hidden;
+}
+
+.main-content {
+  .flex-block();
+}
+
+button.submit {
+  border-radius   : 6px;
+  width           : 100%;
+  box-shadow      : 0 3px 30px @boxshadowColor;
+  color           : #ffffff;
+  background-color: @buttonBackgroundColor;
+  border          : 1px solid @subtitleColor;
+  padding         : 11px 78px;
+  cursor          : pointer;
+  max-width       : 220px;
+  margin-left     : 20px;
+  font-size       : @mainSize;
+  line-height     : 26px;
+
+  &:hover {
+    color           : @contrastColor;
+    background-color: @subtitleColor;
+  }
+}
+
+.tag-filters-container {
+  margin-top: 15px;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.button-next {
+  position  : absolute;
+  right     : calc(100% - 90%);
+  margin-top: -63px;
+  width     : 5%;
+  height    : 7%;
+  cursor    : pointer;
+  .flex-block();
+  .align-items(center);
+}
+
+.button-prev {
+  position  : absolute;
+  left      : calc(100% - 90%);
+  margin-top: -63px;
+  width     : 5%;
+  height    : 7%;
+  z-index   : 10;
+  cursor    : pointer;
+  .flex-block();
+  .align-items(center);
+}
+
+.button-disabled {
+  display: none;
+}
+
+.fixed-tag {
+  position  : fixed;
+  top       : 0;
+  left      : 50%;
+  z-index   : 10;
+  margin    : 0 auto;
+  background: white;
+  width     : 100%;
+  .transform(translateX(-50%));
+  padding-left : 10%;
+  padding-right: 10%;
+  padding-top  : 20px;
+
+  &:after {
+    content         : "";
+    height          : 2px;
+    background-color: @fourthColor;
+    width           : 100%;
+    display         : block;
+    position        : absolute;
+    left            : 0;
+  }
+}
+
+.close-tag {
+  width           : auto;
+  background-color: @mainColor;
+  height          : 30px;
+  display         : block;
+  position        : absolute;
+  padding         : 6px 20px;
+  color           : @thirdColor;
+  text-align      : center;
+  right           : 0;
+}
+
+.close-tag-transition {
+  .transform(translateX(-50%) translateY(-100%));
+  .transition(0.2s);
+}
+
+.tag-filters {
+  width                  : 100%;
+  height                 : 100%;
+  margin-left            : auto;
+  margin-right           : auto;
+  overflow-y             : auto;
+  font-weight            : normal !important;
+  display                : flex;
+  flex-wrap              : wrap;
+  display                : -webkit-box;
+  display                : -ms-flexbox;
+  display                : -webkit-flex;
+  display                : flex;
+  -webkit-box-pack       : left;
+  -ms-flex-pack          : left;
+  -webkit-justify-content: left;
+  justify-content        : left;
+  -webkit-box-align      : left;
+  -ms-flex-align         : left;
+
+  & .swiper-slide {
+    border          : 1px solid @subtitleColor;
+    padding         : 5px 5px;
+    border-radius   : 4px;
+    background-color: @menuColor;
+    box-shadow      : 3px 3px 12px @boxshadowColor;
+    margin-right    : 5px;
+    text-align      : center;
+    color           : #fff;
+    font-size       : 12px;
+    text-decoration : none;
+    width           : auto;
+
+    & a {
+      margin-bottom  : 5px !important;
+      text-decoration: none;
+      font-weight    : normal;
+    }
+
+    &:hover {
+      background-color: #fff;
+      color           : @backgroundColor;
+      border          : 1px solid @subtitleColor;
+    }
+  }
+}
+
+.current {
+  background-color: @secondColor  !important;
+  border          : 1px solid @currentTextColor;
+}
+
+.default {
+  // To remove default link color and underline on link tag
+  text-decoration: none;
+  color          : inherit;
+}
+
+
+a.btn {
+  text-decoration : none;
+  border-radius   : 3px;
+  text-transform  : uppercase;
+  font-weight     : bold;
+  text-align      : center;
+  background-color: #f18d8d;
+  opacity         : 1;
+  color           : #fff;
+}
+
+.grid {
+  width          : 100%;
+  display        : flex;
+  flex-wrap      : wrap;
+  justify-content: center;
+}
+
+.smalllogo {
+
+  margin-bottom: -5px;
+  width        : 40px;
+  margin:3px;
+}
+
+.footer {
+  position: absolute;
+  width   : 100%;
+  height  : auto;
+  top     : auto;
+}
+
+@media screen and (max-width: 900px) {
+  xsection {
+    padding: 50px 20px;
+  }
+
+  .packages,
+  .grid,
+  li {
+    padding   : 10px;
+    flex-basis: 100%;
+  }
+
+  .centered {
+    text-align: center;
+  }
+
+  .section {
+    width : 95%;
+    margin: 0 auto;
+  }
+
+}
+
+body {
+  background-color: @backgroundColor;
+  // max-width: 100% !important;
+  overflow-x:clip ;
+}
+
+.xxnav {
+  font-family     : @mainFont;
+  color           : @menuTextColor;
+  height          : 40px;
+  width           : 100%;
+  background-color: @menuColor;
+  opacity         : .5;
+  position        : fixed;
+  left            : 0;
+  top             : 0;
+  z-index         : 10;
+  transition      : all 0.3s ease-in-out;
+  max-width: 100vw !important;
+}
+
+.xxnav:hover {
+  opacity   : 1;
+  box-shadow: 5px 5px 10px @boxshadowColor;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-icon {
+  font-size: 40px;
+  color    : @subtitleColor;
+}
+
+.xxnav>.xxnav-header {
+  display: inline;
+}
+
+.xxnav>.xxnav-header>.xxnav-title {
+  display        : inline;
+  // font-size: 14px;
+  color          : @menuTextColor;
+  padding        : 10px;
+  text-decoration: none;
+}
+
+.xxnav>.xxnav-header>.xxnav-title>a {
+  text-decoration: none;
+  color          : @menuTextColor;
+}
+
+.xxnav>.xxnav-btn {
+  display: none;
+}
+
+.xxnav>.xxnav-links {
+  display       : inline;
+  float         : right;
+  height        : 100%;
+  vertical-align: bottom;
+
+}
+
+.xxnavsection-on {
+  color: @subtitleColor
+}
+
+.xxnavsection-off {
+  color: @subtitleColor;
+}
+
+.xxnav>.xxnav-links>a {
+  display        : inline-block;
+  padding-top    : 12px;
+  padding-bottom : 6px;
+  padding-right  : 12px;
+  padding-left   : 12px;
+  font-weight    : 400;
+  text-decoration: none;
+}
+
+.xxnav>#xxnav-check {
+  display: none;
+}
+
+.nav-user {
+  float: right;
+}
+
+.tag-line {
+  position: absolute;
+    top: 10px;
+  max-width   : 9%;
+  padding-top : 8px;
+  padding-left: 8px;
+  display     : inline-block;
+  color       : @tagColor;
+  font-size   : 16px;
+  font-weight : 500;
+  font-family : @mainFont  !important;
+  white-space: nowrap;
+}
+
+@media (max-width:900px) {
+  .xxnav>.xxnav-btn {
+    display : inline-block;
+    position: absolute;
+    right   : 0px;
+    top     : 0px;
+  }
+
+  .tag-line {
+    display: none;
+  }
+
+  .list-tabs {
+    height    : 7%;
+    min-height: 40px;
+  }
+
+  .xxnav>.xxnav-btn>label {
+    display: inline-block;
+    width  : 50px;
+    height : 40px;
+    padding: 6px;
+  }
+
+  .xxnav>.xxnav-btn>label:hover {
+    background-color: @subtitleColor;
+    color           : black;
+  }
+
+  .xxnav>.xxnav-btn>label>span {
+    display      : block;
+    width        : 35px;
+    height       : 8px;
+    border-radius: 5px;
+    border-top   : 4px solid @tagColor;
+    margin       : 2px;
+  }
+
+
+  .xxnav>.xxnav-links {
+    position        : absolute;
+    display         : block;
+    width           : 100%;
+    background-color: @backgroundColor;
+    color           : white;
+    height          : 0px;
+    transition      : all 0.3s ease-in;
+    overflow-y      : hidden;
+    top             : 40px;
+    left            : 0px;
+  }
+
+  .xxnav>.xxnav-links>a {
+    display: block;
+    width  : 100%;
+  }
+
+  .xxnav>#xxnav-check:not(:checked)+.xxnav-links {
+    height: 0px;
+  }
+
+  .xxnav>#xxnav-check:checked+.xxnav-links {
+    height    : calc(100vh - 40px);
+    overflow-y: auto;
+  }
+
+  .xxnav>.xxnav-btn:active+.xxnav-links {
+    transition: all 0.3s ease-out;
+    height    : 0px;
+    color     : red;
+  }
+
+  .xhero-content-area2 {
+    font-size: 20px !important;
+  }
+
+  .histoRow {
+    font-size: 12px !important;
+  }
+}
+
+.swiper-container-coverflow {
+  overflow: hidden;
+}
+
+.swiper-container-horizontal {
+  padding  : 0px;
+  width    : 100%;
+  max-width: 100%;
+}
+
+.swiper-pagination-bullet-active {
+  background: @subtitleColor  !important;
+}
+
+.scrollbar-thumb-y {
+  background: @subtitleColor  !important;
+  cursor    : pointer;
+  width     : 4px !important;
+}
+
+.scrollbar-thumb-x {
+  background: @subtitleColor  !important;
+  cursor    : pointer;
+  height    : 4px !important;
+}
+
+.scrollbar-track-x {
+  background: @thirdColor  !important;
+  height    : 4px !important;
+}
+
+.scrollbar-track-y {
+  background: @thirdColor  !important;
+  width     : 4px !important;
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events        : none;
+
+  -webkit-user-select: none;
+  -moz-user-select   : none;
+  user-select        : none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: @subtitleColor;
+  position  : fixed;
+  z-index   : 2000;
+  top       : 0;
+  right     : 100%;
+  width     : 100%;
+  height    : 5px;
+}
+
+.load-more {
+  padding         : 25px;
+  width           : 100%;
+  border          : 1px solid black;
+  background-color: @subtitleColor;
+  color           : white;
+}
+
+.mdropdown {
+  margin          : 0;
+  padding         : 0;
+  list-style      : none;
+  width           : 100px;
+  background-color: @buttonBackgroundColor;
+  transition      : all 0.8s ease-in;
+}
+
+.mdropdown li {
+  position: relative;
+
+}
+
+.mdropdown li a {
+  color          : #ffffff;
+  text-align     : center;
+  text-decoration: none;
+  display        : block;
+  padding        : 8px;
+
+}
+
+.mdropdown li ul {
+  position        : absolute;
+  top             : 100%;
+  margin          : 0;
+  margin-left     : -2px;
+  padding         : 0;
+  list-style      : none;
+  display         : none;
+  line-height     : normal;
+  background-color: @buttonBackgroundColor;
+  border          : 1px solid @subtitleColor;
+  transition      : all 0.8s ease-in;
+  box-shadow      : 5px 5px 10px @boxshadowColor;
+}
+
+.mdropdown li ul li a {
+  text-align : left;
+  color      : #cccccc;
+  font-size  : 12px;
+  padding    : 8px;
+  display    : block;
+  white-space: nowrap;
+  transition : all 0.3s ease-in;
+
+}
+
+.mdropdown li ul li ul {
+  border-left: none;
+
+}
+
+.mdropdown li ul li a:hover {
+  background-color: @backgroundColor;
+  color           : #ffffff;
+
+}
+
+.mdropdown li ul li ul {
+  left: 100%;
+  top : 0;
+
+}
+
+ul li:hover>a {
+  background-color: @backgroundColor;
+
+  color: #ffffff !important;
+}
+
+ul li:hover>ul {
+
+  display: block;
+
+}
+
+.hover-underline-animation {
+  display : inline-block;
+  position: relative;
+  color   : @subtitleColor ;
+}
+
+.hover-underline-animation:after {
+  content         : '';
+  position        : absolute;
+  width           : 100%;
+  transform       : scaleX(0);
+  height          : 2px;
+  bottom          : 0;
+  left            : 0;
+  background-color: @subtitleColor;
+  transform-origin: bottom right;
+  transition      : transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform       : scaleX(1);
+  transform-origin: bottom left;
+}
+
+@import "font.less";

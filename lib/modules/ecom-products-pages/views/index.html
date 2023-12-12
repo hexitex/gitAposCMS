@@ -1,0 +1,41 @@
+{# {% import "macros/backButton.html" as backButton %} #}
+{# {% import "macros/navigation.html" as nav %} #}
+{% import "macros/indexSearch.html" as search with context %}
+{# {% extends data.outerLayout %} #}
+{% extends "layout.html" %}
+{% if data.piece %}
+  {% if data.piece.seoTitle %}
+    {% set title = data.piece.seoTitle %}
+  {% else %}
+    {% set title = data.piece.title %}
+  {% endif %}
+{% else %}
+  {% if data.page.seoTitle %}
+    {% set title = data.page.seoTitle %}
+  {% else %}
+    {% set title = data.page.title %}
+  {% endif %}
+{% endif %}
+{% block title %}{{ title }}
+{% endblock %}
+{% block extraHead %}
+  {% include "apostrophe-seo:view.html" %}
+  {{ super() }}
+{% endblock %}
+
+{% block main %}
+  <main data-apos-ajax-context="blogs" id="barba-wrapper">
+    <div class="barba-container" data-namespace="main-prod-index">
+    
+      <section id="mainblogSection">
+
+        {% include "indexAjax.html" %}
+
+      </section>
+      
+
+    </div>
+
+  </main>
+
+{% endblock %}

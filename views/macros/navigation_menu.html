@@ -1,0 +1,131 @@
+{% macro nav(data) %}
+
+    <div class="xxnav">
+        <div class="xxnav-header" >
+            <div class="xxnav-title">
+                <a href="{{ data.home._url }}"><img width="100px" class="smalllogo" src='/img/logo.svg' alt="logo"></a>
+                <div class="tag-line">Intelligent Integration</div>
+            </div>
+        </div>
+        <div class="xxnav-btn">
+            <label for="xxnav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+        <input type="checkbox" id="xxnav-check">
+        <div class="xxnav-links">
+
+            <ul class="mdropdown" >
+                <li>
+                    <a href="#">Menu</a>
+
+                    {% if data.home._children.length > 0 %}
+                        <ul class="">
+                            {% for tab in data.home._children %}
+                                {# {% if tab.title != data.page.title %} #}
+                                <li>
+                                    <a href="{{ tab._url }}" class="list-tabs orange-text child-tab" onclick="UTILS.pageTop()" style="{% if tab.title == "Search" %}display:none;{% endif %}">
+                                        {{ tab.title }}
+                                        {{ ' >' if tab._children.length > 0 }}
+
+                                    </a>
+
+                                    {# {% endif %} #}
+                                    {# {{tab|dump}} #}
+                                    {% if tab._children.length > 0 %}
+                                        <ul>
+                                            {% for tabx in tab._children %}
+                                                <li>
+                                                    <a href="{{ tabx._url }}" class="list-tabs orange-text child-tab" >
+                                                        {{ tabx.title }}
+                                                        {{ ' >>' if tabx._children.length > 0 }}
+                                                    </a>
+
+                                                    {% if tabx._children.length > 0 %}
+                                                        <ul >
+                                                            {% for tabx3 in tabx._children %}
+                                                                <li >
+                                                                    <a href="{{ tabx3._url }}" class="list-tabs orange-text child-tab" >
+                                                                        {{ tabx3.title }}
+                                                                        {{ ' >>>' if tabx3._children.length > 0 }}
+                                                                    </a>
+                                                                    {% if tabx3._children.length > 0 %}
+                                                                        <ul >
+                                                                            {% for tabx31 in tabx3._children %}
+                                                                                <li >
+                                                                                    <a href="{{ tabx31._url }}" class="list-tabs orange-text child-tab" >
+                                                                                        {{ tabx31.title }}
+                                                                                    </a>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    {% endif %}
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+
+                        {% for itm in data.page.widgets.items %}
+
+                            {% if itm.type == 'section' %}
+
+                                {% if itm.showInNav %}
+                                    <li>
+                                        <a href="#{{ itm.navName | css }}" class="list-tabs orange-text here-tab"  onclick="document.getElementById('xxnav-check').checked=false;">
+                                            {% if itm.altNavName %}
+                                                {{ itm.altNavName }}
+                                                {%else%}
+                                                {{ itm.navName }}
+                                                {%endif%}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {#} <a href="" class="list-tabs font-3d-float child-tab" onclick="UTILS.pageTop()">Langauge</a>{#}
+
+                    </div>
+                    <div class="nav-user">
+                        {% if data.user %}
+                            <small>
+                                <small>Welcome {{data.user.firstName}}
+                                    <a href="/logout">Logout </a>
+                                </small>
+                            </small>
+                        {% endif %}
+
+                        {# <dl id="sample" class="dropdown ">
+                            <dt tog="yes">
+                                <a href="#"><img class="flag" src="/img/{{apos.workflow.lang()}}.png" alt=""/></a>
+                            </dt>
+                            <dd tog="yes">
+                                <ul >
+                                    {% for localization in apos
+                                        .workflow
+                                        .localizations() %}
+                                        <li>
+                                            <a tog="yes" onClick="$.post('{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}')" href="#"><img class="flag" src="/img/{{ localization.workflowLocale }}.png" alt=""/>
+                                                <span class="value">{{localization.name}}</span></a>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </dd>
+                        </dl>
+                        {% set activeLocale = apos
+                            .workflow
+                            .lang() %}#}
+                    </div>
+                </div>
+
+            {% endmacro %}

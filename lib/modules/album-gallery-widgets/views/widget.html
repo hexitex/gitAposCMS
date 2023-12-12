@@ -1,0 +1,44 @@
+{% import "macros/widgets.html" as widget %}
+<div  class="swiper-container"  id="{{data.widget.albumName}}" class="swiper-container" style="width:{{data.widget.width}}; height:{{data.widget.height}};" data-album="{{ data.widget.albumName}}">
+
+    <div class="swiper-wrapper">
+   
+        {% set image = apos.attachments.all(data.widget.albumSwiper) %}
+         {% if image.length>0 %}
+            {% for piece in image %} 
+                <div class="text-slider swiper-slide" style="background-image:url('{{ apos.attachments.url(piece , { edit : false }) }}')"></div>
+            {% endfor %}
+        {%else%} 
+
+            {%if data.widget.textPlayer%}
+           
+            {% for item in data.widget.textPlayer %}
+                <div class="text-slider swiper-slide" > 
+                {{ apos.area(item, 'text', {edit:false}) }}
+                </div>
+            {% endfor %}
+             
+            {% endif %}
+        {% endif %}
+    
+   </div> 
+   
+   <!-- If we need pagination -->
+   {% if data.widget.pagination %} 
+   <div class="swiper-pagination"></div>
+   {%endif%}
+
+    <!-- If we need navigation buttons -->
+    {% if data.widget.navigation %}
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    {%endif%}
+
+    <!-- If we need scrollbar -->
+    {% if data.widget.scrollbar %}
+    <div class="swiper-scrollbar"></div>
+    {%endif%}
+
+
+{# </div> #}
+</div>
