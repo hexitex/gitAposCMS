@@ -1,0 +1,18 @@
+{% import "apostrophe-schemas:macros.html" as schemas %}
+
+<form class="contact-form" id="{{ data.page._id }}"  data-quote-request-form>
+<p class="form-instruction">{{ data.widget.instruction }}</p>
+ 
+  {% for piece in data.quotes %}
+    <label class="label-contact" for="{{ piece.name }}" style="{{ "display:none;" if piece.readOnly }}">
+    {{ piece.label }} 
+   
+    {{ schemas.stringBody(piece) }}     
+    </label> 
+  {% endfor %}
+  <button type="submit" class="submitContact">Submit</button>
+  {# Later gets hoisted out and becomes visible #}
+  <div class="thank-you" data-thank-you>
+    <h4>Thank you for your information! We'll respond soon, normally within 24 hours :)</h4>
+  </div>
+</form>

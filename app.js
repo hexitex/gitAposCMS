@@ -3,10 +3,8 @@ var path = require('path')
 module.exports = require('apostrophe')({
   root: module,
 
-
-  shortName: 'podbit',
-  // baseUrl: 'https://www.podbit.com',
-
+  shortName: process.env.SHORTNAME,
+  
   // See lib/modules for basic project-level configuration of our modules
   // responsible for serving static assets, managing page templates and
   // configuring user accounts.
@@ -47,13 +45,13 @@ module.exports = require('apostrophe')({
       // different transports are available, this one
       // matches how PHP does it on Linux servers
       nodemailer: {
-        host: "smtp.zoho.com",
+        host: process.env.EMAILSERVER,
         port: 465,
         secure: true
         , // true for 465, false for other ports
         auth: {
-          user: 'admin@podbit.com', // generated ethereal user
-          pass: process.env.ZOHOPASSWORD // generated ethereal password
+          user: process.env.EMAILUSER, // generated ethereal user
+          pass: process.env.EMAILPASSWORD // generated ethereal password
         },
         tls: {
           ciphers: 'SSLv3'
@@ -433,9 +431,6 @@ module.exports = require('apostrophe')({
             // 'apostrophe-workflow',
             'apostrophe-files',
             'apostrophe-images',
-
-
-
           ]
         },
         {
@@ -481,6 +476,19 @@ module.exports = require('apostrophe')({
     //   // of the "published" field, for instance
     //   fields: ['first', 'last','pass','emailAddress', 'mobile', 'address1','address2','address3','address4','country', 'postcode']
     // },
+    'quote-request-form':{},
+    'quote-request-form-submit-widgets' : { 
+      
+      extend: 'apostrophe-pieces-submit-widgets',
+    // Always spell out the schema field names the user is allowed to edit.
+    // You almost certainly don't want them to have control
+    // of the "published" field, for instance
+    fields: ['date','title','slug','personName','email','telephone',
+    'numberOfRooms','numberOfExtWalls','message', 'address',
+    'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10']
+      //export: true
+    },
+    'quote-request-form-widgets' : {playerData:false},
     'apostrophe-assets': {
       minify: false
       //   ,

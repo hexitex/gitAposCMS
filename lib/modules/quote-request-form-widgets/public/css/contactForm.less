@@ -1,0 +1,116 @@
+@fullWidth : 100%;
+@fullHeight : 100%;
+// @mainColor : #0F58FF;
+// @secondColor : #393F4E;
+// @thirdColor : #F4F4F4;
+// @fourthColor : #EFF4FF;
+// @mainFont : Mont-Book;
+// @mainWeight : normal;
+// @mainStyle : normal;
+// @mainSize : 20px;
+
+.form-instruction{
+   
+    margin-bottom: 40px;
+   
+}
+
+form.contact-form{
+    padding:40px 10px 25px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    input ,textarea{
+        width : 100%;
+        // border-radius : 50px;
+        background : none;
+        border:none;
+        border-bottom : @inputBorder;
+        font-size: @mainSize;
+        margin-bottom: 58.8px;
+        padding : 25px;
+        color:@inputTextColor;
+    font-family: @mainFont;
+        // font-weight : @mainWeight;
+        // font-style : @mainStyle;
+    }
+}
+
+input[name="personName"]{
+    height : 61px;
+    margin-top: 11px;
+    display: inherit;
+}
+
+input[name="email"]{
+    margin-top: 11px;
+    display: inherit;
+    height : 61px;
+}
+
+textarea[name="message"]{
+    margin-top: 11px;
+    display: inherit;
+   // height : 150px;
+}
+
+.thank-you{
+    display : none;
+}
+
+.label-contact{
+    font-size : 28px;
+    line-height : 34px;
+    // letter-spacing: -0.35px;
+    flex : 1 50%;
+    padding-right:12px;
+}
+
+label[for="message"]{
+    flex : 1 100%;
+}
+
+button.submitContact{
+    border-radius: 6px;
+    box-shadow: 0 3px 30px rgba(0,0,0,0.18);
+    color : @apos-white;
+    background-color: @mainColor;
+    border : 1px solid @subtitleColor;
+    padding : 11px 78px;
+    cursor: pointer;
+    width:100%;
+    //margin-left : 20px;
+    font-size: 18.62px;
+    line-height: 26px;
+    // letter-spacing: -0.20px;
+
+    &:hover{
+        color : #ffffff;
+        background-color: @mainColor;
+    }
+}
+
+@media only screen and (max-width : 900px){
+    form.contact-form{
+        padding : 0 0;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        input , textarea{
+            margin-bottom: 18.8px;
+        }
+    }
+
+    .form-instruction{
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .label-contact{
+        font-size: 24.76px;
+        line-height: 34px;
+        // letter-spacing: -0.20px;
+    }
+
+    .label-contact{
+        flex : 1 100%;
+    }
+}

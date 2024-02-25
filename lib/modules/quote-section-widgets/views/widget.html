@@ -1,0 +1,10 @@
+
+{# <a href="#contact" class="default"></a> #}
+<section  id="{{ data.widget.quoteTitle | css }}" data-namespace="quote">
+    <div class="contact-content-home">
+        {# <h1 class="big-title Mont-Light">{{ data.widget.contactTitle }}</h1> #}
+        <div class="parent-contact">
+            {{ apos.singleton(data.widget, 'quoteArea', 'quote-request-form') }}        
+        </div>
+    </div>
+</section>
