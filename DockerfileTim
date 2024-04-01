@@ -1,0 +1,24 @@
+FROM node:12.14.0
+
+# Create app directory
+
+RUN mkdir -p /apptimdris
+# install imagemagick
+RUN apt install imagemagick
+WORKDIR /apptimdris
+
+# Bundle app source
+
+COPY . /apptimdris
+RUN npm install
+
+# Mount persistent storage
+
+VOLUME /apptimdris/data
+
+VOLUME /apptimdris/public/uploads
+
+ENV APOS_ALWAYS_COPY_ASSETS=1
+EXPOSE 3000
+CMD [ "npm", "start" ]
+
