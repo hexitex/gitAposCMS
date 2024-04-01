@@ -8,6 +8,9 @@
     padding: 5px ;
 
 }
+.apos-area.apos-empty {
+    background-color: #eeeeee21!important;
+}
 .apos-area .apos-widget-group-widget
 {
     font-size: 12px !important;
@@ -497,22 +500,23 @@ padding-right: 125px;
     color:@aposButtonBackgroundColor;
     text-decoration: dotted 1px @subtitleColor;
 }
-.apos-area-structure-body{
-    background-color: rgb(255 115 1 / 6%)
-}
+// .apos-area-structure-body{
+//     background-color: rgb(255 115 1 / 6%)
+// }
 .apos-reorganize-tree .jqtree-tree .apos-reorganize-controls:hover{
 color:@subtitleColor;
 }
 .apos-area-structure-body .apos-area-structure-list--widgets
 {
-    border-left: double 3px @aposHeaderColor !important;
+    border-left: 1px @aposHeaderColor !important;
 }
-.apos-area-structure-body .apos-area-structure-list--area{
-    border-left: 4px double @aposButtonBackgroundColor !important;
-}
+// .apos-area-structure-body .apos-area-structure-list--area{
+//     border-left: 4px double @aposButtonBackgroundColor !important;
+// }
 .apos-area-structure-body ol {
-    background-color: rgb(80 107 170 / 35%) !important;
-    font-size: 16px;
+  //  background-color: rgb(80 107 170 / 35%) !important;
+    font-size: 12px;
+    // border-bottom: 1px solid @aposHeaderColor !important;
 }
 .apos-ui .apos-button{
     border: 1px solid @aposBorderColor;
@@ -524,9 +528,23 @@ color:@subtitleColor;
 .apos-ui .apos-field-tags .apos-tags .apos-tag-list {
    background-color: @aposButtonBackgroundColor;
 }
-
-
-
+[data-apos-modal-current="area-structure-modal"]{width:35%}
+.apos-area-structure-body .apos-area-structure-list--widgets>li {
+    border-bottom: 0 !important;
+    // border-radius: 6px;
+    margin: -3px;
+    
+}
+.apos-area-structure-body .apos-area-structure-list--area {
+    border-left: 1px solid @aposHeaderColor !important;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+.apos-area-structure-body .apos-area-structure-list--widgets {
+   
+    margin-bottom: .1rem; 
+   margin-top: .5rem; 
+}
 .apos-ui .apos-field-input-select-wrapper::after {
     content: "\f0d7";
     position: absolute;

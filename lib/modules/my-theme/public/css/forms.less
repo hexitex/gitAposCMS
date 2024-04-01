@@ -226,9 +226,9 @@ form[data-apos-forms-form] button,
 button.submitContact {
     border-radius   : 6px;
     box-shadow      : 0 3px 30px rgba(0, 0, 0, 0.18);
-    color           : @mainColor;
-    background-color: @subtitleColor;
-    border          : 1px solid @buttonBackgroundColor;
+    color           : @buttonTextColor;
+    background-color: @buttonBackgroundColor;
+    border          : 1px solid @buttonBorderColor;
     padding         : 11px 18px;
     cursor          : pointer;
     width           : 100%;
@@ -237,8 +237,8 @@ button.submitContact {
     text-align      : center;
 
     &:hover {
-        background-color: @buttonBackgroundColor;
-        border-color    : @subtitleColor;
+        background-color: @buttonBackgroundHoverColor;
+        color:@buttonTextColor;
 
     }
 }

@@ -5,6 +5,7 @@ module.exports = require('apostrophe')({
 
   shortName: process.env.SHORTNAME,
   
+  
   // See lib/modules for basic project-level configuration of our modules
   // responsible for serving static assets, managing page templates and
   // configuring user accounts.
@@ -197,7 +198,10 @@ module.exports = require('apostrophe')({
     // EXPRESS NODEJS
     'apostrophe-express': {
 
-      csrf: false
+     // csrf: true,
+       csrf: {
+        exceptions: [ '/quote-request-form-submit/submit','/quote' ]
+      }
       //,
       // csrf: {
       //  //exceptions: [ '/paypal/complete' ]
@@ -336,7 +340,7 @@ module.exports = require('apostrophe')({
     'comments': { export: true },
     'likes': { playerData: false },
     'contact-form': { playerData: false, export: true, import: true },
-    'member-form': { playerData: false, export: true, import: true },
+    //'member-form': { playerData: false, export: true, import: true },
     // 'member-pages': { playerData: false },
     // 'memberLookup-pages': { playerData: false },
     'email-signup-form': { export: true },
@@ -359,16 +363,16 @@ module.exports = require('apostrophe')({
 
 
     //WIDGETS
-    'apostrophe-twitter': {},
+    // 'apostrophe-twitter': {},
     'reviews-widgets': { playerData: false },
-    'apostrophe-twitter-widgets': {
-      consumerKey: process.env.TWITTERCONSUMERKEY,
-      consumerSecret: process.env.TWITTERCONSUMERSECRET,
-      accessToken: process.env.TWITTERACCESSTOKEN,
-      accessTokenSecret: process.env.TWITTERACCESSTOKENSECRET
-      //,
-      //playerData: false
-    },
+    // 'apostrophe-twitter-widgets': {
+    //   consumerKey: process.env.TWITTERCONSUMERKEY,
+    //   consumerSecret: process.env.TWITTERCONSUMERSECRET,
+    //   accessToken: process.env.TWITTERACCESSTOKEN,
+    //   accessTokenSecret: process.env.TWITTERACCESSTOKENSECRET
+    //   //,
+    //   //playerData: false
+    // },
     'apostrophe-link-widgets': { playerData: false },
     'apostrophe-forms-widgets': { disableBaseStyles: true },
     'apostrophe-forms-text-field-widgets': {},
@@ -385,14 +389,14 @@ module.exports = require('apostrophe')({
     'squarebox-gallery-widgets': { playerData: false },
     'album-gallery-widgets': {},
     'contact-section-widgets': { playerData: false },
-    'member-section-widgets': { playerData: true },
-    'email-signup-section-widgets': { playerData: false },
+    //'member-section-widgets': { playerData: true },
+    //'email-signup-section-widgets': { playerData: false },
     'two-columns-widgets': { playerData: false },
     'three-columns-widgets': { playerData: false },
     'one-columns-widgets': { playerData: false },
-    'email-signup-form-widgets': { playerData: false },
+    //'email-signup-form-widgets': { playerData: false },
     'contact-form-widgets': { playerData: false },
-    'member-form-widgets': { playerData: true },
+    //'member-form-widgets': { playerData: true },
     'likes-widgets': { playerData: false },
     'comments-widgets': { playerData: false },
     // 'facebookFeed-widgets': { playerData: false },
@@ -439,7 +443,7 @@ module.exports = require('apostrophe')({
             'apostrophe-blog',
             'contact-form',
             'likes',
-            'email-signup-form',
+            // 'email-signup-form',
             'comments',
             'templateSections',
           ]
@@ -453,7 +457,7 @@ module.exports = require('apostrophe')({
             'ecom-orders',
             'ecom-shippings',
             'reviews',
-            'member-form',
+           // 'member-form',
             'ecom-emails'
           ]
         },
@@ -476,16 +480,19 @@ module.exports = require('apostrophe')({
     //   // of the "published" field, for instance
     //   fields: ['first', 'last','pass','emailAddress', 'mobile', 'address1','address2','address3','address4','country', 'postcode']
     // },
-    'quote-request-form':{},
+    'quote-section-widgets': { playerData: true },
+    'quote-request-form':{playerData:true},
     'quote-request-form-submit-widgets' : { 
-      
+      playerData:true,
       extend: 'apostrophe-pieces-submit-widgets',
+      scene: 'user',
     // Always spell out the schema field names the user is allowed to edit.
     // You almost certainly don't want them to have control
     // of the "published" field, for instance
     fields: ['date','title','slug','personName','email','telephone',
     'numberOfRooms','numberOfExtWalls','message', 'address',
     'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10']
+
       //export: true
     },
     'quote-request-form-widgets' : {playerData:false},
